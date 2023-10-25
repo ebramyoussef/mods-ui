@@ -35,11 +35,6 @@ class Injection_diagram(Display):
         self.ui.embeddedControl.embedded_widget.tilt_m.clicked.connect(self.emb_tilt_m)
         self.ui.embeddedControl.embedded_widget.tilt_p.clicked.connect(self.emb_tilt_p)
         self.ui.embeddedControl.embedded_widget.tilt_pp.clicked.connect(self.emb_tilt_pp)
-<<<<<<< HEAD
-        ## have to define values from other screen
-        ## below for the testing mirror
-=======
->>>>>>> 43531de347026aca76bcfee4cc3bc5df785834bf
         self.ui.tip_step_size = EpicsSignalRO('LM1K2:MCS2:01:m1:STEP_COUNT', name = 'm1_step_size')
         self.ui.tilt_step_size = EpicsSignalRO('LM1K2:MCS2:01:m2:STEP_COUNT', name = 'm2_step_size')
         self.ui.tip_total_step = EpicsSignal('LM1K2:MCS2:01:m1:TOTAL_STEP_COUNT', write_pv = "LM1K2:MCS2:01:m1:SET_TOTAL_STEP_COUNT", name = 'tip_steps')
