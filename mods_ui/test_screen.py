@@ -53,7 +53,7 @@ class testScreen(Display):
             )
             self.redraw_rate_val = float(screen.ui.redrawRateLineEdit.text())
         except ValueError:
-            self.no_errors = False
+            screen.no_errors = False
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Critical)
             msg.setText("ValueError: Invalid input values.")
