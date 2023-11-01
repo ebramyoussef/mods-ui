@@ -3,7 +3,7 @@ from pydm import Display
 from PyQt5.QtWidgets import QApplication
 import sys
 from PyQt5 import QtWidgets
-from .image_settings import Ui_imageSettingsForm
+from image_settings import Ui_imageSettingsForm
 import pyqtgraph as pg
 
 
@@ -13,7 +13,7 @@ class testScreen(Display):
             parent=parent, args=args, macros=macros
         )
         self.ui.NFImageSettingsPushButton.clicked.connect(
-            lambda: self.load_image_settings()
+            lambda: self.load_image_settings(self.ui.NFImageView)
         )
         self.show()
 
