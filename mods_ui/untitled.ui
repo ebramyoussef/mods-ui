@@ -36,7 +36,7 @@
         </widget>
        </item>
        <item>
-        <widget class="PyDMImageView" name="PyDMImageView">
+        <widget class="PyDMImageView" name="NFImageView">
          <property name="toolTip">
           <string/>
          </property>
@@ -1401,7 +1401,7 @@
         </widget>
        </item>
        <item>
-        <widget class="PyDMImageView" name="PyDMImageView_2">
+        <widget class="PyDMImageView" name="FFImageView">
          <property name="toolTip">
           <string/>
          </property>
