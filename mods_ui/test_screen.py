@@ -31,6 +31,11 @@ class testScreen(Display):
         screen = imageSettingsScreen()
         screen.ui.colorMapMinLineEdit.setText(str(image_object.colorMapMin))
         screen.ui.colorMapMaxLineEdit.setText(str(image_object.colorMapMax))
+        screen.ui.ROIPositionXLineEdit.setText(str(image_object.roi.pos().x()))
+        screen.ui.ROIPositionYLineEdit.setText(str(image_object.roi.pos().y()))
+        screen.ui.ROIRangeXLineEdit.setText(str(image_object.roi.size().x()))
+        screen.ui.ROIRangeYLineEdit.setText(str(image_object.roi.size().y()))
+        screen.ui.redrawRateLineEdit.setText(str(image_object.maxRedrawRate))
         screen.ui.normalizeCheckBox.setChecked(image_object.normalizeData)
         screen.show()
         screen.ui.buttonBox.accepted.connect(
@@ -47,14 +52,18 @@ class testScreen(Display):
                 screen.ui.colorMapMaxLineEdit.text()
             )
             self.normalize_val = screen.ui.normalizeCheckBox.isChecked()
-            self.ROI_center_x_val = float(screen.ui.ROICenterXLineEdit.text())
+            self.ROI_position_x_val = float(
+                screen.ui.ROIPositionXLineEdit.text()
+            )
             self.ROI_range_x_val = float(screen.ui.ROIRangeXLineEdit.text())
-            self.ROI_center_y_val = float(screen.ui.ROICenterYLineEdit.text())
+            self.ROI_position_y_val = float(
+                screen.ui.ROIPositionYLineEdit.text()
+            )
             self.ROI_range_y_val = float(screen.ui.ROIRangeYLineEdit.text())
             self.orientation_idx = int(
                 screen.ui.orientationComboBox.currentIndex()
             )
-            self.redraw_rate_val = float(screen.ui.redrawRateLineEdit.text())
+            self.redraw_rate_val = int(screen.ui.redrawRateLineEdit.text())
         except ValueError:
             screen.no_errors = False
             msg = QtWidgets.QMessageBox()
@@ -67,6 +76,12 @@ class testScreen(Display):
             image_object.colorMapMin = self.color_map_min_val
             image_object.colorMapMax = self.color_map_max_val
             image_object.normalizeData = self.normalize_val
+            roi_pos = pg.Point(
+                self.ROI_position_x_val, self.ROI_position_y_val
+            )
+            roi_size = pg.Point(self.ROI_range_x_val, self.ROI_range_y_val)
+            image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
+            image_object.maxRedrawRate = self.redraw_rate_val
             screen.close()
 
 
