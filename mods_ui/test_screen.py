@@ -15,8 +15,8 @@ class testScreen(Display):
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.ui.NFImageView)
         )
-        print(self.ui.NFImageView.roi.pos)
-        print(self.ui.NFImageView.roi.size)
+        print(self.ui.NFImageView.roi.pos())
+        print(self.ui.NFImageView.roi.size())
         self.show()
 
     def ui_filename(self):
