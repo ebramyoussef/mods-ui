@@ -1,110 +1,1550 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>alignmentScreen</class>
+ <widget class="QWidget" name="alignmentScreen">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>540</width>
-    <height>824</height>
+    <width>1100</width>
+    <height>615</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Alignment Screen</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="PyDMImageView" name="PyDMImageView">
-       <property name="toolTip">
-        <string/>
-       </property>
-       <property name="alarmSensitiveContent" stdset="0">
-        <bool>false</bool>
-       </property>
-       <property name="alarmSensitiveBorder" stdset="0">
-        <bool>true</bool>
-       </property>
-       <property name="PyDMToolTip" stdset="0">
-        <string/>
-       </property>
-       <property name="channel" stdset="0">
-        <string/>
-       </property>
-       <property name="colorMapMax" stdset="0">
-        <double>1000.000000000000000</double>
-       </property>
-       <property name="colorMap" stdset="0">
-        <enum>PyDMImageView::Jet</enum>
-       </property>
-       <property name="autoDownsample" stdset="0">
-        <bool>true</bool>
-       </property>
-       <property name="imageWidth" stdset="0">
-        <number>640</number>
-       </property>
-       <property name="normalizeData" stdset="0">
-        <bool>true</bool>
-       </property>
-       <property name="readingOrder" stdset="0">
-        <enum>PyDMImageView::Clike</enum>
-       </property>
-       <property name="imageChannel" stdset="0">
-        <string>ca://LAS:LHN:BAY3:CAM:NF2:IMAGE1:ArrayData</string>
-       </property>
-       <property name="widthChannel" stdset="0">
-        <string notr="true">ca://LAS:LHN:BAY3:CAM:NF2:IMAGE1:ArraySize0_RBV</string>
-       </property>
-       <property name="maxRedrawRate" stdset="0">
-        <number>30</number>
-       </property>
-       <property name="showAxes" stdset="0">
-        <bool>false</bool>
-       </property>
-       <property name="scaleXAxis" stdset="0">
-        <double>1.000000000000000</double>
-       </property>
-       <property name="scaleYAxis" stdset="0">
-        <double>1.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="PyDMImageView" name="PyDMImageView_2">
-     <property name="toolTip">
-      <string/>
-     </property>
-     <property name="colorMapMax" stdset="0">
-      <double>10000.000000000000000</double>
-     </property>
-     <property name="colorMap" stdset="0">
-      <enum>PyDMImageView::Jet</enum>
-     </property>
-     <property name="normalizeData" stdset="0">
-      <bool>false</bool>
-     </property>
-     <property name="readingOrder" stdset="0">
-      <enum>PyDMImageView::Clike</enum>
-     </property>
-     <property name="imageChannel" stdset="0">
-      <string>ca://LAS:LHN:BAY3:CAM:FF2:IMAGE1:ArrayData</string>
-     </property>
-     <property name="widthChannel" stdset="0">
-      <string notr="true">ca://LAS:LHN:BAY3:CAM:FF2:IMAGE1:ArraySize0_RBV</string>
+    <widget class="QLabel" name="headerLabel">
+     <property name="text">
+      <string>TMO - Compressor TILE - MP1 Alignment</string>
      </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout" rowstretch="1,0">
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Near-field image</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PyDMImageView" name="PyDMImageView">
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="colorMapMax" stdset="0">
+          <double>255.000000000000000</double>
+         </property>
+         <property name="colorMap" stdset="0">
+          <enum>PyDMImageView::Jet</enum>
+         </property>
+         <property name="autoDownsample" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="normalizeData" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="readingOrder" stdset="0">
+          <enum>PyDMImageView::Clike</enum>
+         </property>
+         <property name="imageChannel" stdset="0">
+          <string>ca://LM1K4:COM_DP1_TF1_NF1:IMAGE1:ArrayData</string>
+         </property>
+         <property name="widthChannel" stdset="0">
+          <string>ca://LM1K4:COM_DP1_TF1_NF1:IMAGE1:ArraySize0_RBV</string>
+         </property>
+         <property name="maxRedrawRate" stdset="0">
+          <number>30</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>CentroidX</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="PyDMLabel" name="PyDMLabel_5">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="precision" stdset="0">
+            <number>1</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_DP1_TF1_NF1:Stats2:CentroidX_RBV</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>CentroidY</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="PyDMLabel" name="PyDMLabel_6">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="precision" stdset="0">
+            <number>1</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_DP1_TF1_NF1:Stats2:CentroidY_RBV</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_13">
+         <property name="text">
+          <string>Mirror 1: horizontal control</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>Mirror 1: vertical control</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <layout class="QGridLayout" name="gridLayout_6" rowstretch="1,0,0" columnstretch="2,1,2">
+         <item row="1" column="0">
+          <widget class="PyDMPushButton" name="M1VRevPushButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Jog reverse</string>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR1_TIP1:STEP_REVERSE</string>
+           </property>
+           <property name="passwordProtected" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="password" stdset="0">
+            <string/>
+           </property>
+           <property name="protectedPassword" stdset="0">
+            <string/>
+           </property>
+           <property name="showConfirmDialog" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="confirmMessage" stdset="0">
+            <string>Are you sure you want to proceed?</string>
+           </property>
+           <property name="pressValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="releaseValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="relativeChange" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="writeWhenRelease" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="PyDMFrame" name="PyDMFrame">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="PyDMByteIndicator" name="PyDMByteIndicator">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="alarmSensitiveContent" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="alarmSensitiveBorder" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="PyDMToolTip" stdset="0">
+               <string/>
+              </property>
+              <property name="channel" stdset="0">
+               <string>ca://LM1K4:COM_MP1_MR1_TIP1:STEP_REVERSE.PROC</string>
+              </property>
+              <property name="showLabels" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="bigEndian" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="circles" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="numBits" stdset="0">
+               <number>1</number>
+              </property>
+              <property name="shift" stdset="0">
+               <number>0</number>
+              </property>
+              <property name="labels" stdset="0">
+               <stringlist>
+                <string>Bit 0</string>
+               </stringlist>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="PyDMByteIndicator" name="PyDMByteIndicator_5">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="alarmSensitiveContent" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="alarmSensitiveBorder" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="PyDMToolTip" stdset="0">
+               <string/>
+              </property>
+              <property name="channel" stdset="0">
+               <string>ca://LM1K4:COM_MP1_MR1_TIP1:STEP_FORWARD.PROC</string>
+              </property>
+              <property name="showLabels" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="bigEndian" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="circles" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="numBits" stdset="0">
+               <number>1</number>
+              </property>
+              <property name="shift" stdset="0">
+               <number>0</number>
+              </property>
+              <property name="labels" stdset="0">
+               <stringlist>
+                <string>Bit 0</string>
+               </stringlist>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Jog step size</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="PyDMLineEdit" name="M1VStepLineEdit">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR1_TIP1:STEP_COUNT</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="PyDMLabel" name="PyDMLabel">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR1_TIP1:STEP_COUNT</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="PyDMPushButton" name="M1VFwdPushButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Jog forward</string>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR1_TIP1:STEP_REVERSE</string>
+           </property>
+           <property name="passwordProtected" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="password" stdset="0">
+            <string/>
+           </property>
+           <property name="protectedPassword" stdset="0">
+            <string/>
+           </property>
+           <property name="showConfirmDialog" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="confirmMessage" stdset="0">
+            <string>Are you sure you want to proceed?</string>
+           </property>
+           <property name="pressValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="releaseValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="relativeChange" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="writeWhenRelease" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="PyDMLabel" name="PyDMLabel_9">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR1_TIP1:TOTAL_STEP_COUNT</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="1">
+        <layout class="QGridLayout" name="gridLayout_7" rowstretch="1,1,0" columnstretch="2,1,2">
+         <item row="1" column="0">
+          <widget class="PyDMPushButton" name="M1HRevPushButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Jog reverse</string>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR1_TILT1:STEP_REVERSE</string>
+           </property>
+           <property name="passwordProtected" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="password" stdset="0">
+            <string/>
+           </property>
+           <property name="protectedPassword" stdset="0">
+            <string/>
+           </property>
+           <property name="showConfirmDialog" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="confirmMessage" stdset="0">
+            <string>Are you sure you want to proceed?</string>
+           </property>
+           <property name="pressValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="releaseValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="relativeChange" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="writeWhenRelease" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="PyDMFrame" name="PyDMFrame_2">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="PyDMByteIndicator" name="PyDMByteIndicator_2">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="alarmSensitiveContent" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="alarmSensitiveBorder" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="PyDMToolTip" stdset="0">
+               <string/>
+              </property>
+              <property name="channel" stdset="0">
+               <string>ca://LM1K4:COM_MP1_MR1_TILT1:STEP_REVERSE.PROC</string>
+              </property>
+              <property name="showLabels" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="bigEndian" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="circles" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="numBits" stdset="0">
+               <number>1</number>
+              </property>
+              <property name="shift" stdset="0">
+               <number>0</number>
+              </property>
+              <property name="labels" stdset="0">
+               <stringlist>
+                <string>Bit 0</string>
+               </stringlist>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="PyDMByteIndicator" name="PyDMByteIndicator_6">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="alarmSensitiveContent" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="alarmSensitiveBorder" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="PyDMToolTip" stdset="0">
+               <string/>
+              </property>
+              <property name="channel" stdset="0">
+               <string>ca://LM1K4:COM_MP1_MR1_TILT1:STEP_FORWARD.PROC</string>
+              </property>
+              <property name="showLabels" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="bigEndian" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="circles" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="numBits" stdset="0">
+               <number>1</number>
+              </property>
+              <property name="shift" stdset="0">
+               <number>0</number>
+              </property>
+              <property name="labels" stdset="0">
+               <stringlist>
+                <string>Bit 0</string>
+               </stringlist>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="PyDMLabel" name="PyDMLabel_2">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR1_TILT1:STEP_COUNT</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="PyDMPushButton" name="M1HFwdPushButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Jog forward</string>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR1_TILT1:STEP_FORWARD</string>
+           </property>
+           <property name="passwordProtected" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="password" stdset="0">
+            <string/>
+           </property>
+           <property name="protectedPassword" stdset="0">
+            <string/>
+           </property>
+           <property name="showConfirmDialog" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="confirmMessage" stdset="0">
+            <string>Are you sure you want to proceed?</string>
+           </property>
+           <property name="pressValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="releaseValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="relativeChange" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="writeWhenRelease" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_16">
+           <property name="text">
+            <string>Jog step size</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="PyDMLineEdit" name="M1HStepLineEdit">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR1_TILT1:STEP_COUNT</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="PyDMLabel" name="PyDMLabel_10">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR1_TILT1:TOTAL_STEP_COUNT</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="1">
+      <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0" columnstretch="0,0">
+       <item row="1" column="0">
+        <layout class="QGridLayout" name="gridLayout_8" rowstretch="1,1,0" columnstretch="2,1,2">
+         <item row="0" column="1">
+          <widget class="PyDMLineEdit" name="M2VStepLinEdit">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR4_TIP1:STEP_COUNT</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>Jog step size</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="PyDMLabel" name="PyDMLabel_3">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR4_TIP1:STEP_COUNT</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="PyDMFrame" name="PyDMFrame_3">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="PyDMByteIndicator" name="PyDMByteIndicator_4">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="alarmSensitiveContent" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="alarmSensitiveBorder" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="PyDMToolTip" stdset="0">
+               <string/>
+              </property>
+              <property name="channel" stdset="0">
+               <string>ca://LM1K4:COM_MP1_MR4_TIP1:STEP_REVERSE.PROC</string>
+              </property>
+              <property name="showLabels" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="bigEndian" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="circles" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="numBits" stdset="0">
+               <number>1</number>
+              </property>
+              <property name="shift" stdset="0">
+               <number>0</number>
+              </property>
+              <property name="labels" stdset="0">
+               <stringlist>
+                <string>Bit 0</string>
+               </stringlist>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="PyDMByteIndicator" name="PyDMByteIndicator_3">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="alarmSensitiveContent" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="alarmSensitiveBorder" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="PyDMToolTip" stdset="0">
+               <string/>
+              </property>
+              <property name="channel" stdset="0">
+               <string>ca://LM1K4:COM_MP1_MR4_TIP1:STEP_FORWARD.PROC</string>
+              </property>
+              <property name="showLabels" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="bigEndian" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="circles" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="numBits" stdset="0">
+               <number>1</number>
+              </property>
+              <property name="shift" stdset="0">
+               <number>0</number>
+              </property>
+              <property name="labels" stdset="0">
+               <stringlist>
+                <string>Bit 0</string>
+               </stringlist>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="PyDMPushButton" name="M2VFwdPushButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Jog forward</string>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR4_TIP1:STEP_FORWARD</string>
+           </property>
+           <property name="passwordProtected" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="password" stdset="0">
+            <string/>
+           </property>
+           <property name="protectedPassword" stdset="0">
+            <string/>
+           </property>
+           <property name="showConfirmDialog" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="confirmMessage" stdset="0">
+            <string>Are you sure you want to proceed?</string>
+           </property>
+           <property name="pressValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="releaseValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="relativeChange" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="writeWhenRelease" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="PyDMPushButton" name="M2VRevPushButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Jog reverse</string>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR4_TIP1:STEP_REVERSE</string>
+           </property>
+           <property name="passwordProtected" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="password" stdset="0">
+            <string/>
+           </property>
+           <property name="protectedPassword" stdset="0">
+            <string/>
+           </property>
+           <property name="showConfirmDialog" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="confirmMessage" stdset="0">
+            <string>Are you sure you want to proceed?</string>
+           </property>
+           <property name="pressValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="releaseValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="relativeChange" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="writeWhenRelease" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="PyDMLabel" name="PyDMLabel_11">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR4_TIP1:TOTAL_STEP_COUNT</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_15">
+         <property name="text">
+          <string>Mirror 2: horizontal control</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_14">
+         <property name="text">
+          <string>Mirror 2: vertical control</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <layout class="QGridLayout" name="gridLayout_9" rowstretch="1,0,0" columnstretch="2,1,2">
+         <item row="0" column="1">
+          <widget class="PyDMLineEdit" name="M2HStepLineEdit">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR4_TILT1:STEP_COUNT</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="PyDMFrame" name="PyDMFrame_4">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="PyDMByteIndicator" name="PyDMByteIndicator_7">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="alarmSensitiveContent" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="alarmSensitiveBorder" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="PyDMToolTip" stdset="0">
+               <string/>
+              </property>
+              <property name="channel" stdset="0">
+               <string>ca://LM1K4:COM_MP1_MR4_TILT1:STEP_REVERSE.PROC</string>
+              </property>
+              <property name="showLabels" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="bigEndian" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="circles" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="numBits" stdset="0">
+               <number>1</number>
+              </property>
+              <property name="shift" stdset="0">
+               <number>0</number>
+              </property>
+              <property name="labels" stdset="0">
+               <stringlist>
+                <string>Bit 0</string>
+               </stringlist>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="PyDMByteIndicator" name="PyDMByteIndicator_8">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="alarmSensitiveContent" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="alarmSensitiveBorder" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="PyDMToolTip" stdset="0">
+               <string/>
+              </property>
+              <property name="channel" stdset="0">
+               <string>ca://LM1K4:COM_MP1_MR4_TILT1:STEP_FORWARD.PROC</string>
+              </property>
+              <property name="showLabels" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="bigEndian" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="circles" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="numBits" stdset="0">
+               <number>1</number>
+              </property>
+              <property name="shift" stdset="0">
+               <number>0</number>
+              </property>
+              <property name="labels" stdset="0">
+               <stringlist>
+                <string>Bit 0</string>
+               </stringlist>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="PyDMPushButton" name="M2HRevPushButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Jog reverse</string>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR4_TILT1:STEP_REVERSE</string>
+           </property>
+           <property name="passwordProtected" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="password" stdset="0">
+            <string/>
+           </property>
+           <property name="protectedPassword" stdset="0">
+            <string/>
+           </property>
+           <property name="showConfirmDialog" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="confirmMessage" stdset="0">
+            <string>Are you sure you want to proceed?</string>
+           </property>
+           <property name="pressValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="releaseValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="relativeChange" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="writeWhenRelease" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="PyDMPushButton" name="M2HFwdPushButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Jog forward</string>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="monitorDisp" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR4_TILT1:STEP_FORWARD</string>
+           </property>
+           <property name="passwordProtected" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="password" stdset="0">
+            <string/>
+           </property>
+           <property name="protectedPassword" stdset="0">
+            <string/>
+           </property>
+           <property name="showConfirmDialog" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="confirmMessage" stdset="0">
+            <string>Are you sure you want to proceed?</string>
+           </property>
+           <property name="pressValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="releaseValue" stdset="0">
+            <string>None</string>
+           </property>
+           <property name="relativeChange" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="writeWhenRelease" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_18">
+           <property name="text">
+            <string>Jog step size</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="PyDMLabel" name="PyDMLabel_4">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR4_TILT1:STEP_COUNT</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="PyDMLabel" name="PyDMLabel_12">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="precision" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_MP1_MR4_TILT1:TOTAL_STEP_COUNT</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0">
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Far-field image</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="PyDMImageView" name="PyDMImageView_2">
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="colorMapMax" stdset="0">
+          <double>255.000000000000000</double>
+         </property>
+         <property name="colorMap" stdset="0">
+          <enum>PyDMImageView::Jet</enum>
+         </property>
+         <property name="normalizeData" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="readingOrder" stdset="0">
+          <enum>PyDMImageView::Clike</enum>
+         </property>
+         <property name="imageChannel" stdset="0">
+          <string>ca://LM1K4:COM_DP1_TF1_FF1:IMAGE1:ArrayData</string>
+         </property>
+         <property name="widthChannel" stdset="0">
+          <string>ca://LM1K4:COM_DP1_TF1_FF1:IMAGE1:ArraySize0_RBV</string>
+         </property>
+         <property name="showAxes" stdset="0">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>CentroidX</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="PyDMLabel" name="PyDMLabel_7">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="precision" stdset="0">
+            <number>1</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_DP1_TF1_FF1:Stats2:CentroidX_RBV</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>CentroidY</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="PyDMLabel" name="PyDMLabel_8">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="precision" stdset="0">
+            <number>1</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_DP1_TF1_FF1:Stats2:CentroidY_RBV</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
+   <class>PyDMLabel</class>
+   <extends>QLabel</extends>
+   <header>pydm.widgets.label</header>
+  </customwidget>
+  <customwidget>
+   <class>PyDMByteIndicator</class>
+   <extends>QWidget</extends>
+   <header>pydm.widgets.byte</header>
+  </customwidget>
+  <customwidget>
+   <class>PyDMFrame</class>
+   <extends>QFrame</extends>
+   <header>pydm.widgets.frame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>PyDMImageView</class>
    <extends>QWidget</extends>
    <header>pydm.widgets.image</header>
+  </customwidget>
+  <customwidget>
+   <class>PyDMLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>pydm.widgets.line_edit</header>
+  </customwidget>
+  <customwidget>
+   <class>PyDMPushButton</class>
+   <extends>QPushButton</extends>
+   <header>pydm.widgets.pushbutton</header>
   </customwidget>
  </customwidgets>
  <resources/>
