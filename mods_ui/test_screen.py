@@ -27,7 +27,7 @@ class testScreen(Display):
 
     def load_image_settings(self, image_object):
         screen = imageSettingsScreen(image_object)
-        if screen.no_errors is True:
+        if screen.no_errors is True and screen.closed is True:
             image_object.colorMapMin = screen.color_map_min_val
             image_object.colorMapMax = screen.color_map_max_val
             image_object.normalizeData = screen.normalize_val
@@ -41,6 +41,7 @@ class imageSettingsScreen(QtWidgets.QWidget):
         self.ui.buttonBox.accepted.connect(self.ok)
         self.ui.buttonBox.rejected.connect(self.close)
         self.no_errors = True
+        self.closed = False
         self.show()
 
     def ok(self):
@@ -64,11 +65,12 @@ class imageSettingsScreen(QtWidgets.QWidget):
             msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
             msg.buttonClicked.connect(self.show)
             msg.exec_()
-
+        self.closed = True
         self.close()
 
     def cancel(self):
         self.no_errors = False
+        self.closed = True
         self.close()
 
     def ui_filename(self):
