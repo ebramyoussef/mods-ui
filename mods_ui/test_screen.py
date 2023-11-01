@@ -9,9 +9,9 @@ class testScreen(Display):
         super(testScreen, self).__init__(
             parent=parent, args=args, macros=macros
         )
-        # self.ui.NFImageView.autoLevels()
+        self.ui.NFImageView.setNormalizeData(True)
         # self.ui.NFImageView.autoRange()
-        # self.ui.FFImageView.autoLevels()
+        self.ui.FFImageView.setNormalizeData(True)
         # self.ui.FFImageView.autoRange()
         self.show()
 
