@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>imageSettingsForm</class>
+ <widget class="QWidget" name="imageSettingsForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>332</width>
+    <height>268</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Image settings</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="colorMapMinLabel">
+       <property name="text">
+        <string>Color map min</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="colorMapMinLineEdit"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="colorMapMaxLabel">
+       <property name="text">
+        <string>Color map max</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="colorMapMaxLineEdit"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="normalizeLabel">
+       <property name="text">
+        <string>Normalize</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QCheckBox" name="normalizeCheckBox"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="ROICenterXLabel">
+       <property name="text">
+        <string>ROI center x</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="ROICenterXLineEdit"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="ROIRangeXLabel">
+       <property name="text">
+        <string>ROI range x</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="ROIRangeXLineEdit"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="ROICenterYLabel">
+       <property name="text">
+        <string>ROI center y</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="ROICenterYLineEdit"/>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="ROIRangeYLabel">
+       <property name="text">
+        <string>ROI range y</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="ROIRangeYLineEdit"/>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="orientationLabel">
+       <property name="text">
+        <string>Orientation</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QComboBox" name="orientationComboBox">
+       <item>
+        <property name="text">
+         <string>Unchanged</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Rotate 90</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Rotate 180</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Rotate 270</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Flip H</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Flip V</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+     <property name="centerButtons">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
