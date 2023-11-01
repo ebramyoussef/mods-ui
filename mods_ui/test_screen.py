@@ -28,35 +28,28 @@ class testScreen(Display):
     def load_image_settings(self, image_object):
         screen = imageSettingsScreen(image_object)
         screen.show()
-        if screen.no_errors is True:
-            image_object.colorMapMin = screen.color_map_min_val
-            image_object.colorMapMax = screen.color_map_max_val
-            image_object.normalizeData = screen.normalize_val
+        screen.ui.buttonBox.accepted.connect(
+            lambda: self.apply_image_settings(screen, image_object)
+        )
+        screen.ui.buttonBox.rejected.connect(screen.close)
 
-
-class imageSettingsScreen(QtWidgets.QWidget):
-    def __init__(self, image_object):
-        super(imageSettingsScreen, self).__init__()
-        self.ui = Ui_imageSettingsForm()
-        self.ui.setupUi(self)
-        self.ui.buttonBox.accepted.connect(self.ok)
-        self.ui.buttonBox.rejected.connect(self.close)
-        self.no_errors = True
-        self.closed = False
-
-    def ok(self):
+    def apply_image_settings(self, screen, image_object):
         try:
-            self.color_map_min_val = float(self.ui.colorMapMinLineEdit.text())
-            self.color_map_max_val = float(self.ui.colorMapMaxLineEdit.text())
-            self.normalize_val = self.ui.normalizeCheckBox.isChecked()
-            self.ROI_center_x_val = float(self.ui.ROICenterXLineEdit.text())
-            self.ROI_range_x_val = float(self.ui.ROIRangeXLineEdit.text())
-            self.ROI_center_y_val = float(self.ui.ROICenterYLineEdit.text())
-            self.ROI_range_y_val = float(self.ui.ROIRangeYLineEdit.text())
-            self.orientation_idx = int(
-                self.ui.orientationComboBox.currentIndex()
+            self.color_map_min_val = float(
+                screen.ui.colorMapMinLineEdit.text()
             )
-            self.redraw_rate_val = float(self.ui.redrawRateLineEdit.text())
+            self.color_map_max_val = float(
+                screen.ui.colorMapMaxLineEdit.text()
+            )
+            self.normalize_val = screen.ui.normalizeCheckBox.isChecked()
+            self.ROI_center_x_val = float(screen.ui.ROICenterXLineEdit.text())
+            self.ROI_range_x_val = float(screen.ui.ROIRangeXLineEdit.text())
+            self.ROI_center_y_val = float(screen.ui.ROICenterYLineEdit.text())
+            self.ROI_range_y_val = float(screen.ui.ROIRangeYLineEdit.text())
+            self.orientation_idx = int(
+                screen.ui.orientationComboBox.currentIndex()
+            )
+            self.redraw_rate_val = float(screen.ui.redrawRateLineEdit.text())
         except ValueError:
             self.no_errors = False
             msg = QtWidgets.QMessageBox()
@@ -65,13 +58,22 @@ class imageSettingsScreen(QtWidgets.QWidget):
             msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
             msg.buttonClicked.connect(self.show)
             msg.exec_()
-        self.closed = True
-        self.close()
+        if screen.no_errors is True:
+            image_object.colorMapMin = self.color_map_min_val
+            image_object.colorMapMax = self.color_map_max_val
+            image_object.normalizeData = self.normalize_val
+            screen.close()
 
-    def cancel(self):
-        self.no_errors = False
-        self.closed = True
-        self.close()
+
+class imageSettingsScreen(QtWidgets.QWidget):
+    def __init__(self, image_object):
+        super(imageSettingsScreen, self).__init__()
+        self.ui = Ui_imageSettingsForm()
+        self.ui.setupUi(self)
+
+        self.ui.colorMapMinLineEdit.setText(image_object.colorMapMin)
+        self.ui.colorMapMaxLineEdit.setText(image_object.colorMapMax)
+        self.no_errors = True
 
     def ui_filename(self):
         return "image_settings.ui"
