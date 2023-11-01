@@ -9,9 +9,9 @@ class testScreen(Display):
         super(testScreen, self).__init__(
             parent=parent, args=args, macros=macros
         )
-        self.ui.NFImageView.normalize(self.ui.NFImageView.imageItem)
+        self.ui.NFImageView.normalizeData = True
         # self.ui.NFImageView.autoRange()
-        self.ui.FFImageView.normalize(self.ui.NFImageView.imageItem)
+        self.ui.NFImageView.normalizeData = True
         # self.ui.FFImageView.autoRange()
         self.ui.FFImageView.redrawImage()
         self.ui.NFImageView.redrawImage()
