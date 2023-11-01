@@ -26,7 +26,9 @@ class testScreen(Display):
         )
 
     def load_image_settings(self, image_object):
-        screen = imageSettingsScreen(image_object)
+        screen = imageSettingsScreen()
+        screen.ui.colorMapMinLineEdit.setText(str(image_object.colorMapMin))
+        screen.ui.colorMapMaxLineEdit.setText(str(image_object.colorMapMax))
         screen.show()
         screen.ui.buttonBox.accepted.connect(
             lambda: self.apply_image_settings(screen, image_object)
@@ -66,13 +68,10 @@ class testScreen(Display):
 
 
 class imageSettingsScreen(QtWidgets.QWidget):
-    def __init__(self, image_object):
+    def __init__(self):
         super(imageSettingsScreen, self).__init__()
         self.ui = Ui_imageSettingsForm()
         self.ui.setupUi(self)
-
-        self.ui.colorMapMinLineEdit.setText(image_object.colorMapMin)
-        self.ui.colorMapMaxLineEdit.setText(image_object.colorMapMax)
         self.no_errors = True
 
     def ui_filename(self):
