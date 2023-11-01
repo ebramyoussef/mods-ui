@@ -73,9 +73,15 @@ class Ui_imageSettingsForm(object):
         self.orientationComboBox.addItem("")
         self.orientationComboBox.addItem("")
         self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.orientationComboBox)
+        self.redrawRateLabel = QtWidgets.QLabel(imageSettingsForm)
+        self.redrawRateLabel.setObjectName("redrawRateLabel")
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.LabelRole, self.redrawRateLabel)
+        self.redrawRateLineEdit = QtWidgets.QLineEdit(imageSettingsForm)
+        self.redrawRateLineEdit.setObjectName("redrawRateLineEdit")
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.redrawRateLineEdit)
         self.verticalLayout.addLayout(self.formLayout)
         self.buttonBox = QtWidgets.QDialogButtonBox(imageSettingsForm)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Apply|QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setCenterButtons(False)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout.addWidget(self.buttonBox)
@@ -100,6 +106,7 @@ class Ui_imageSettingsForm(object):
         self.orientationComboBox.setItemText(3, _translate("imageSettingsForm", "Rotate 270"))
         self.orientationComboBox.setItemText(4, _translate("imageSettingsForm", "Flip H"))
         self.orientationComboBox.setItemText(5, _translate("imageSettingsForm", "Flip V"))
+        self.redrawRateLabel.setText(_translate("imageSettingsForm", "Redraw rate"))
 
 
 if __name__ == "__main__":
