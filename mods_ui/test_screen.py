@@ -13,8 +13,8 @@ class testScreen(Display):
         # self.ui.NFImageView.autoRange()
         self.ui.NFImageView.normalizeData = True
         # self.ui.FFImageView.autoRange()
-        self.ui.FFImageView.redrawImage()
-        self.ui.NFImageView.redrawImage()
+        # self.ui.FFImageView.redrawImage()
+        # self.ui.NFImageView.redrawImage()
         self.show()
 
     def ui_filename(self):
