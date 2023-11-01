@@ -27,7 +27,8 @@ class testScreen(Display):
 
     def load_image_settings(self, image_object):
         screen = imageSettingsScreen(image_object)
-        if screen.no_errors is True and screen.closed is True:
+        screen.show()
+        if screen.no_errors is True:
             image_object.colorMapMin = screen.color_map_min_val
             image_object.colorMapMax = screen.color_map_max_val
             image_object.normalizeData = screen.normalize_val
@@ -42,7 +43,6 @@ class imageSettingsScreen(QtWidgets.QWidget):
         self.ui.buttonBox.rejected.connect(self.close)
         self.no_errors = True
         self.closed = False
-        self.show()
 
     def ok(self):
         try:
