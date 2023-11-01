@@ -15,6 +15,8 @@ class testScreen(Display):
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.ui.NFImageView)
         )
+        print(self.ui.NFImageView.roi.pos)
+        print(self.ui.NFImageView.roi.size)
         self.show()
 
     def ui_filename(self):
@@ -29,6 +31,7 @@ class testScreen(Display):
         screen = imageSettingsScreen()
         screen.ui.colorMapMinLineEdit.setText(str(image_object.colorMapMin))
         screen.ui.colorMapMaxLineEdit.setText(str(image_object.colorMapMax))
+        screen.ui.normalizeCheckBox.setChecked(image_object.normalizeData)
         screen.show()
         screen.ui.buttonBox.accepted.connect(
             lambda: self.apply_image_settings(screen, image_object)
