@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>332</width>
-    <height>268</height>
+    <height>297</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,19 +47,19 @@
       <widget class="QCheckBox" name="normalizeCheckBox"/>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="ROICenterXLabel">
+      <widget class="QLabel" name="ROIPositionXLabel">
        <property name="text">
-        <string>ROI center x</string>
+        <string>ROI position x</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLineEdit" name="ROICenterXLineEdit"/>
+      <widget class="QLineEdit" name="ROIPositionXLineEdit"/>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="ROIRangeXLabel">
        <property name="text">
-        <string>ROI range x</string>
+        <string>ROI size x</string>
        </property>
       </widget>
      </item>
@@ -67,19 +67,19 @@
       <widget class="QLineEdit" name="ROIRangeXLineEdit"/>
      </item>
      <item row="5" column="0">
-      <widget class="QLabel" name="ROICenterYLabel">
+      <widget class="QLabel" name="ROIPositionYLabel">
        <property name="text">
-        <string>ROI center y</string>
+        <string>ROI position y</string>
        </property>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QLineEdit" name="ROICenterYLineEdit"/>
+      <widget class="QLineEdit" name="ROIPositionYLineEdit"/>
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="ROIRangeYLabel">
        <property name="text">
-        <string>ROI range y</string>
+        <string>ROI size y</string>
        </property>
       </widget>
      </item>
