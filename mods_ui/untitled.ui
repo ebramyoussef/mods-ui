@@ -26,128 +26,6 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout" rowstretch="1,0">
-     <item row="0" column="0">
-      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0">
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Near-field image</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="PyDMImageView" name="NFImageView">
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="colorMapMax" stdset="0">
-          <double>255.000000000000000</double>
-         </property>
-         <property name="colorMap" stdset="0">
-          <enum>PyDMImageView::Jet</enum>
-         </property>
-         <property name="autoDownsample" stdset="0">
-          <bool>true</bool>
-         </property>
-         <property name="normalizeData" stdset="0">
-          <bool>false</bool>
-         </property>
-         <property name="readingOrder" stdset="0">
-          <enum>PyDMImageView::Clike</enum>
-         </property>
-         <property name="imageChannel" stdset="0">
-          <string>ca://LM1K4:COM_DP1_TF1_NF1:IMAGE1:ArrayData</string>
-         </property>
-         <property name="widthChannel" stdset="0">
-          <string>ca://LM1K4:COM_DP1_TF1_NF1:IMAGE1:ArraySize0_RBV</string>
-         </property>
-         <property name="maxRedrawRate" stdset="0">
-          <number>30</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>CentroidX</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="PyDMLabel" name="PyDMLabel_5">
-           <property name="toolTip">
-            <string/>
-           </property>
-           <property name="precision" stdset="0">
-            <number>1</number>
-           </property>
-           <property name="showUnits" stdset="0">
-            <bool>false</bool>
-           </property>
-           <property name="precisionFromPV" stdset="0">
-            <bool>true</bool>
-           </property>
-           <property name="alarmSensitiveContent" stdset="0">
-            <bool>false</bool>
-           </property>
-           <property name="alarmSensitiveBorder" stdset="0">
-            <bool>true</bool>
-           </property>
-           <property name="PyDMToolTip" stdset="0">
-            <string/>
-           </property>
-           <property name="channel" stdset="0">
-            <string>ca://LM1K4:COM_DP1_TF1_NF1:Stats2:CentroidX_RBV</string>
-           </property>
-           <property name="enableRichText" stdset="0">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>CentroidY</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="PyDMLabel" name="PyDMLabel_6">
-           <property name="toolTip">
-            <string/>
-           </property>
-           <property name="precision" stdset="0">
-            <number>1</number>
-           </property>
-           <property name="showUnits" stdset="0">
-            <bool>false</bool>
-           </property>
-           <property name="precisionFromPV" stdset="0">
-            <bool>true</bool>
-           </property>
-           <property name="alarmSensitiveContent" stdset="0">
-            <bool>false</bool>
-           </property>
-           <property name="alarmSensitiveBorder" stdset="0">
-            <bool>true</bool>
-           </property>
-           <property name="PyDMToolTip" stdset="0">
-            <string/>
-           </property>
-           <property name="channel" stdset="0">
-            <string>ca://LM1K4:COM_DP1_TF1_NF1:Stats2:CentroidY_RBV</string>
-           </property>
-           <property name="enableRichText" stdset="0">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
      <item row="1" column="0">
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="1">
@@ -1391,14 +1269,188 @@
        </item>
       </layout>
      </item>
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Near-field image</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QPushButton" name="NFImageSettingsPushButton">
+           <property name="text">
+            <string>Image settings</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="TyphosRelatedSuiteButton" name="TyphosRelatedSuiteButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Camera expert</string>
+           </property>
+           <property name="happi_names" stdset="0">
+            <stringlist>
+             <string>lm1k4_com_dp1_tf1_nf1</string>
+            </stringlist>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="PyDMImageView" name="NFImageView">
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="colorMapMax" stdset="0">
+          <double>255.000000000000000</double>
+         </property>
+         <property name="colorMap" stdset="0">
+          <enum>PyDMImageView::Jet</enum>
+         </property>
+         <property name="autoDownsample" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="normalizeData" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="readingOrder" stdset="0">
+          <enum>PyDMImageView::Clike</enum>
+         </property>
+         <property name="imageChannel" stdset="0">
+          <string>ca://LM1K4:COM_DP1_TF1_NF1:IMAGE1:ArrayData</string>
+         </property>
+         <property name="widthChannel" stdset="0">
+          <string>ca://LM1K4:COM_DP1_TF1_NF1:IMAGE1:ArraySize0_RBV</string>
+         </property>
+         <property name="maxRedrawRate" stdset="0">
+          <number>30</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>CentroidX</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="PyDMLabel" name="PyDMLabel_5">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="precision" stdset="0">
+            <number>1</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_DP1_TF1_NF1:Stats2:CentroidX_RBV</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>CentroidY</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="PyDMLabel" name="PyDMLabel_6">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="precision" stdset="0">
+            <number>1</number>
+           </property>
+           <property name="showUnits" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="precisionFromPV" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="alarmSensitiveContent" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alarmSensitiveBorder" stdset="0">
+            <bool>true</bool>
+           </property>
+           <property name="PyDMToolTip" stdset="0">
+            <string/>
+           </property>
+           <property name="channel" stdset="0">
+            <string>ca://LM1K4:COM_DP1_TF1_NF1:Stats2:CentroidY_RBV</string>
+           </property>
+           <property name="enableRichText" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
      <item row="0" column="1">
-      <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0">
+      <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0,0">
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
           <string>Far-field image</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QPushButton" name="FFImageSettingsPushButton">
+           <property name="text">
+            <string>Image settings</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="TyphosRelatedSuiteButton" name="TyphosRelatedSuiteButton_2">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Camera expert</string>
+           </property>
+           <property name="happi_names" stdset="0">
+            <stringlist>
+             <string>lm1k4_com_dp1_tf1_nf1</string>
+            </stringlist>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="PyDMImageView" name="FFImageView">
@@ -1545,6 +1597,11 @@
    <class>PyDMPushButton</class>
    <extends>QPushButton</extends>
    <header>pydm.widgets.pushbutton</header>
+  </customwidget>
+  <customwidget>
+   <class>TyphosRelatedSuiteButton</class>
+   <extends>QPushButton</extends>
+   <header>typhos.related_display</header>
   </customwidget>
  </customwidgets>
  <resources/>
