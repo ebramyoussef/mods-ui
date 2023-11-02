@@ -19,6 +19,7 @@ class testScreen(Display):
             lambda: self.load_image_settings(self.ui.FFImageView)
         )
         self.show()
+        self.init_images()
 
     def ui_filename(self):
         return "untitled.ui"
@@ -27,6 +28,11 @@ class testScreen(Display):
         return path.join(
             path.dirname(path.realpath(__file__)), self.ui_filename()
         )
+
+    def init_images(self):
+        print("hello")
+        self.ui.NFImageView.autoLevels()
+        self.ui.FFImageView.autoLevels()
 
     def load_image_settings(self, image_object):
         screen = imageSettingsScreen()
