@@ -1302,6 +1302,13 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="NFSavePushButton">
+           <property name="text">
+            <string>Save image</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
@@ -1319,7 +1326,7 @@
           <bool>true</bool>
          </property>
          <property name="normalizeData" stdset="0">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="readingOrder" stdset="0">
           <enum>PyDMImageView::Clike</enum>
@@ -1450,6 +1457,13 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="FFSavePushButton">
+           <property name="text">
+            <string>Save image</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
@@ -1464,7 +1478,7 @@
           <enum>PyDMImageView::Jet</enum>
          </property>
          <property name="normalizeData" stdset="0">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="readingOrder" stdset="0">
           <enum>PyDMImageView::Clike</enum>
