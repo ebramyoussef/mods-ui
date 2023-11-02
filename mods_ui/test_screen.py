@@ -26,7 +26,6 @@ class testScreen(Display):
             lambda: self.save_image(self.ui.FFImageView)
         )
         self.show()
-        self.init_images()
 
     def ui_filename(self):
         return "untitled.ui"
