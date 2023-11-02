@@ -5,6 +5,7 @@ import sys
 from PyQt5 import QtWidgets
 from image_settings import Ui_imageSettingsForm
 import pyqtgraph as pg
+import numpy as np
 
 
 class testScreen(Display):
@@ -18,6 +19,12 @@ class testScreen(Display):
         self.ui.FFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.ui.FFImageView)
         )
+        self.ui.NFSavePushButton.clicked.connect(
+            lambda: self.save_image(self.ui.NFImageView)
+        )
+        self.ui.FFSavePushButton.clicked.connect(
+            lambda: self.save_image(self.ui.FFImageView)
+        )
         self.show()
         self.init_images()
 
@@ -29,9 +36,8 @@ class testScreen(Display):
             path.dirname(path.realpath(__file__)), self.ui_filename()
         )
 
-    def init_images(self):
-        self.NFImageView.setImage(img=self.NFImageView.image, autoLevels=True)
-        self.FFImageView.setImage(img=self.FFImageView.image, autoLevels=True)
+    def save_image(self, image_object):
+        np.save(image_object.getProcessedImage(), "saved_image.npy")
 
     def load_image_settings(self, image_object):
         screen = imageSettingsScreen()
