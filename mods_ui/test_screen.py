@@ -36,7 +36,9 @@ class testScreen(Display):
         )
 
     def save_image(self, image_object):
-        np.save(image_object.getProcessedImage(), "saved_image.npy")
+        image_item = image_object.getImageItem()
+        data = image_item.image
+        np.save(data, "saved_image.npy")
 
     def load_image_settings(self, image_object):
         screen = imageSettingsScreen()
