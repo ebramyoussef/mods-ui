@@ -30,9 +30,8 @@ class testScreen(Display):
         )
 
     def init_images(self):
-        print("hello")
-        self.ui.NFImageView.autoLevels()
-        self.ui.FFImageView.autoLevels()
+        self.NFImageView.setImage(img=self.NFImageView.image, autoLevels=True)
+        self.FFImageView.setImage(img=self.FFImageView.image, autoLevels=True)
 
     def load_image_settings(self, image_object):
         screen = imageSettingsScreen()
