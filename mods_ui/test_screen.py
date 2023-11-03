@@ -14,7 +14,6 @@ class testScreen(Display):
         super(testScreen, self).__init__(
             parent=parent, args=args, macros=macros
         )
-        self.initialize_image()
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.ui.NFImageView)
         )
@@ -27,6 +26,8 @@ class testScreen(Display):
         self.ui.FFSavePushButton.clicked.connect(
             lambda: self.save_image(self.ui.FFImageView)
         )
+        self.windowTitleChanged.connect(self.initialize_image)
+        self.setWindowTitle("Alignment Screen")
         self.show()
 
     def ui_filename(self):
