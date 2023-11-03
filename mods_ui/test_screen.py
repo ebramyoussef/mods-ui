@@ -11,6 +11,7 @@ import time
 
 class testScreen(Display):
     def __init__(self, parent=None, args=None, macros=None):
+        self.initialize_image()
         super(testScreen, self).__init__(
             parent=parent, args=args, macros=macros
         )
@@ -37,10 +38,20 @@ class testScreen(Display):
         )
 
     def initialize_image(self):
-        self.ui.NFImageView.autoLevels()
-        self.ui.NFImageView.autoRange()
-        self.ui.FFImageView.autoLevels()
-        self.ui.FFImageView.autoRange()
+        NF_image_data = self.ui.NFImageView.getImageItem().image
+        FF_image_data = self.ui.FFImageView.getImageItem().image
+        self.ui.NFImageView.colorMapMin = self.ui.NFImageView.quickMinMax(
+            NF_image_data
+        )[0][0]
+        self.ui.NFImageView.colorMapMax = self.ui.NFImageView.quickMinMax(
+            NF_image_data
+        )[0][1]
+        self.ui.FFImageView.colorMapMin = self.ui.FFImageView.quickMinMax(
+            FF_image_data
+        )[0][0]
+        self.ui.FFImageView.colorMapMax = self.ui.FFImageView.quickMinMax(
+            FF_image_data
+        )[0][1]
 
     def save_image(self, image_object):
         image_item = image_object.getImageItem()
@@ -48,7 +59,7 @@ class testScreen(Display):
         np.save("saved_image.npy", data)
 
     def load_image_settings(self, image_object):
-        self.initialize_image()
+        # self.initialize_image()
         screen = imageSettingsScreen()
         screen.ui.colorMapMinLineEdit.setText(str(image_object.colorMapMin))
         screen.ui.colorMapMaxLineEdit.setText(str(image_object.colorMapMax))
