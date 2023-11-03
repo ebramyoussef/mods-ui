@@ -11,10 +11,10 @@ import time
 
 class testScreen(Display):
     def __init__(self, parent=None, args=None, macros=None):
-        self.initialize_image()
         super(testScreen, self).__init__(
             parent=parent, args=args, macros=macros
         )
+        self.initialize_image()
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.ui.NFImageView)
         )
