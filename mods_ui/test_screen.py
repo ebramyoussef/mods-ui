@@ -1,6 +1,7 @@
 from os import path
 from pydm import Display
 from PyQt5.QtWidgets import QApplication
+from ophyd import EpicsSignal, EpicsSignalRO, EpicsSignalWithRBV
 import sys
 from PyQt5 import QtWidgets
 from image_settings_2 import Ui_imageSettingsForm
@@ -25,6 +26,7 @@ class testScreen(Display):
         self.ui.FFSavePushButton.clicked.connect(
             lambda: self.save_image(self.ui.FFImageView)
         )
+        self.nf_bits = EpicsSignalRO("LM1K4:COM_DP1_TF1_NF1:BIT_DEPTH")
         self.show()
 
     def ui_filename(self):
@@ -53,6 +55,7 @@ class testScreen(Display):
         screen.ui.WLineEdit.setText(str(image_object.roi.size().x()))
         screen.ui.HLineEdit.setText(str(image_object.roi.size().y()))
         screen.ui.normalizeCheckBox.setChecked(image_object.normalizeData)
+        screen.ui.minSlider.setMaximum()
         screen.show()
         screen.ui.buttonBox.accepted.connect(
             lambda: self.apply_image_settings(screen, image_object)
