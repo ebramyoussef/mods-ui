@@ -27,8 +27,6 @@ class testScreen(Display):
             lambda: self.save_image(self.ui.FFImageView)
         )
         self.show()
-        time.sleep(1)
-        self.initialize_image()
 
     def ui_filename(self):
         return "untitled.ui"
@@ -60,6 +58,7 @@ class testScreen(Display):
         np.save("saved_image.npy", data)
 
     def load_image_settings(self, image_object):
+        self.initialize_image()
         screen = imageSettingsScreen()
         screen.ui.colorMapMinLineEdit.setText(str(image_object.colorMapMin))
         screen.ui.colorMapMaxLineEdit.setText(str(image_object.colorMapMax))
