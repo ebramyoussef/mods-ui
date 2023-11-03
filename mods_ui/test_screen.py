@@ -6,6 +6,7 @@ from PyQt5 import QtWidgets
 from image_settings import Ui_imageSettingsForm
 import pyqtgraph as pg
 import numpy as np
+import time
 
 
 class testScreen(Display):
@@ -26,6 +27,7 @@ class testScreen(Display):
             lambda: self.save_image(self.ui.FFImageView)
         )
         self.show()
+        time.sleep(1)
         self.initialize_image()
 
     def ui_filename(self):
