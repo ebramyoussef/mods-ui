@@ -37,20 +37,10 @@ class testScreen(Display):
         )
 
     def initialize_image(self):
-        NF_image_data = self.ui.NFImageView.getImageItem().image
-        FF_image_data = self.ui.FFImageView.getImageItem().image
-        self.ui.NFImageView.colorMapMin = self.ui.NFImageView.quickMinMax(
-            NF_image_data
-        )[0][0]
-        self.ui.NFImageView.colorMapMax = self.ui.NFImageView.quickMinMax(
-            NF_image_data
-        )[0][1]
-        self.ui.FFImageView.colorMapMin = self.ui.FFImageView.quickMinMax(
-            FF_image_data
-        )[0][0]
-        self.ui.FFImageView.colorMapMax = self.ui.FFImageView.quickMinMax(
-            FF_image_data
-        )[0][1]
+        self.ui.NFImageView.autoLevels()
+        self.ui.NFImageView.autoRange()
+        self.ui.FFImageView.autoLevels()
+        self.ui.FFImageView.autoRange()
 
     def save_image(self, image_object):
         image_item = image_object.getImageItem()
