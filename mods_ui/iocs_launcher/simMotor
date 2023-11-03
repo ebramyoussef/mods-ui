@@ -1,6 +1,0 @@
-#!/bin/bash
-
-pushd /home/user/epics/modules/motor/iocBoot/iocSim
-../../bin/linux-x86_64/WithAsyn st.cmd.unix
-popd
-

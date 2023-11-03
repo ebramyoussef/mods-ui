@@ -1,6 +1,0 @@
-#!/bin/bash
-
-pushd /home/user/epics/launcher/linker
-softIoc -d linker.db
-popd
-

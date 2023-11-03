@@ -3,10 +3,9 @@ from pydm import Display
 from PyQt5.QtWidgets import QApplication
 import sys
 from PyQt5 import QtWidgets
-from image_settings import Ui_imageSettingsForm
+from image_settings_2 import Ui_imageSettingsForm
 import pyqtgraph as pg
 import numpy as np
-import time
 
 
 class testScreen(Display):
@@ -26,8 +25,6 @@ class testScreen(Display):
         self.ui.FFSavePushButton.clicked.connect(
             lambda: self.save_image(self.ui.FFImageView)
         )
-        self.windowTitleChanged.connect(self.initialize_image)
-        self.setWindowTitle("Alignment Screen")
         self.show()
 
     def ui_filename(self):
@@ -38,37 +35,23 @@ class testScreen(Display):
             path.dirname(path.realpath(__file__)), self.ui_filename()
         )
 
-    def initialize_image(self):
-        NF_image_data = self.ui.NFImageView.getImageItem().image
-        FF_image_data = self.ui.FFImageView.getImageItem().image
-        self.ui.NFImageView.colorMapMin = self.ui.NFImageView.quickMinMax(
-            NF_image_data
-        )[0][0]
-        self.ui.NFImageView.colorMapMax = self.ui.NFImageView.quickMinMax(
-            NF_image_data
-        )[0][1]
-        self.ui.FFImageView.colorMapMin = self.ui.FFImageView.quickMinMax(
-            FF_image_data
-        )[0][0]
-        self.ui.FFImageView.colorMapMax = self.ui.FFImageView.quickMinMax(
-            FF_image_data
-        )[0][1]
+    def autoset_colormap(self, image_object):
+        min_max = image_object.quickMinMax(image_object.getImageItem().image)
+        image_object.colorMapMin = min_max[0][0]
+        image_object.colorMapMax = min_max[0][1]
 
     def save_image(self, image_object):
-        image_item = image_object.getImageItem()
-        data = image_item.image
-        np.save("saved_image.npy", data)
+        image_data = image_object.getImageItem().image
+        np.save("saved_image.npy", image_data)
 
     def load_image_settings(self, image_object):
-        # self.initialize_image()
         screen = imageSettingsScreen()
-        screen.ui.colorMapMinLineEdit.setText(str(image_object.colorMapMin))
-        screen.ui.colorMapMaxLineEdit.setText(str(image_object.colorMapMax))
-        screen.ui.ROIPositionXLineEdit.setText(str(image_object.roi.pos().x()))
-        screen.ui.ROIPositionYLineEdit.setText(str(image_object.roi.pos().y()))
-        screen.ui.ROIRangeXLineEdit.setText(str(image_object.roi.size().x()))
-        screen.ui.ROIRangeYLineEdit.setText(str(image_object.roi.size().y()))
-        screen.ui.redrawRateLineEdit.setText(str(image_object.maxRedrawRate))
+        screen.ui.minLineEdit.setText(str(image_object.colorMapMin))
+        screen.ui.maxLineEdit.setText(str(image_object.colorMapMax))
+        screen.ui.XLineEdit.setText(str(image_object.roi.pos().x()))
+        screen.ui.YLineEdit.setText(str(image_object.roi.pos().y()))
+        screen.ui.WLineEdit.setText(str(image_object.roi.size().x()))
+        screen.ui.HLineEdit.setText(str(image_object.roi.size().y()))
         screen.ui.normalizeCheckBox.setChecked(image_object.normalizeData)
         screen.show()
         screen.ui.buttonBox.accepted.connect(
@@ -78,25 +61,17 @@ class testScreen(Display):
 
     def apply_image_settings(self, screen, image_object):
         try:
-            self.color_map_min_val = float(
-                screen.ui.colorMapMinLineEdit.text()
-            )
-            self.color_map_max_val = float(
-                screen.ui.colorMapMaxLineEdit.text()
-            )
+            self.color_map_min_val = float(screen.ui.minLineEdit.text())
+            self.color_map_max_val = float(screen.ui.maxLineEdit.text())
             self.normalize_val = screen.ui.normalizeCheckBox.isChecked()
-            self.ROI_position_x_val = float(
-                screen.ui.ROIPositionXLineEdit.text()
-            )
-            self.ROI_range_x_val = float(screen.ui.ROIRangeXLineEdit.text())
-            self.ROI_position_y_val = float(
-                screen.ui.ROIPositionYLineEdit.text()
-            )
-            self.ROI_range_y_val = float(screen.ui.ROIRangeYLineEdit.text())
-            self.orientation_idx = int(
-                screen.ui.orientationComboBox.currentIndex()
-            )
-            self.redraw_rate_val = int(screen.ui.redrawRateLineEdit.text())
+            self.autoset_val = screen.ui.autosetCheckBox.isChecked()
+            self.ROI_position_x_val = float(screen.ui.XLineEdit.text())
+            self.ROI_range_x_val = float(screen.ui.WLineEdit.text())
+            self.ROI_position_y_val = float(screen.ui.YLineEdit.text())
+            self.ROI_range_y_val = float(screen.ui.HLineEdit.text())
+            # self.orientation_idx = int(
+            #     screen.ui.orientationComboBox.currentIndex()
+            # )
         except ValueError:
             screen.no_errors = False
             msg = QtWidgets.QMessageBox()
@@ -106,15 +81,17 @@ class testScreen(Display):
             msg.buttonClicked.connect(self.show)
             msg.exec_()
         if screen.no_errors is True:
-            image_object.colorMapMin = self.color_map_min_val
-            image_object.colorMapMax = self.color_map_max_val
+            if self.autoset_val:
+                self.autoset_colormap(image_object)
+            else:
+                image_object.colorMapMin = self.color_map_min_val
+                image_object.colorMapMax = self.color_map_max_val
             image_object.normalizeData = self.normalize_val
             roi_pos = pg.Point(
                 self.ROI_position_x_val, self.ROI_position_y_val
             )
             roi_size = pg.Point(self.ROI_range_x_val, self.ROI_range_y_val)
             image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
-            image_object.maxRedrawRate = self.redraw_rate_val
             screen.close()
 
 
@@ -124,14 +101,6 @@ class imageSettingsScreen(QtWidgets.QWidget):
         self.ui = Ui_imageSettingsForm()
         self.ui.setupUi(self)
         self.no_errors = True
-
-    def ui_filename(self):
-        return "image_settings.ui"
-
-    def ui_filepath(self):
-        return path.join(
-            path.dirname(path.realpath(__file__)), self.ui_filename()
-        )
 
 
 if __name__ == "__main__":
