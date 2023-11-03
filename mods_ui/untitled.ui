@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1100</width>
+    <width>954</width>
     <height>615</height>
    </rect>
   </property>
@@ -1326,7 +1326,7 @@
           <bool>true</bool>
          </property>
          <property name="normalizeData" stdset="0">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="readingOrder" stdset="0">
           <enum>PyDMImageView::Clike</enum>
@@ -1478,7 +1478,7 @@
           <enum>PyDMImageView::Jet</enum>
          </property>
          <property name="normalizeData" stdset="0">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="readingOrder" stdset="0">
           <enum>PyDMImageView::Clike</enum>

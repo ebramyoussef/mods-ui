@@ -1621,7 +1621,7 @@ background-color: rgb(255, 255, 255);</string>
 background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="precision" stdset="0">
-    <number>6</number>
+    <number>3</number>
    </property>
    <property name="showUnits" stdset="0">
     <bool>true</bool>
@@ -2043,11 +2043,6 @@ background-color: rgb(255, 255, 255);</string>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>TyphosRelatedSuiteButton</class>
-   <extends>QPushButton</extends>
-   <header>typhos.related_display</header>
-  </customwidget>
-  <customwidget>
    <class>PyDMLabel</class>
    <extends>QLabel</extends>
    <header>pydm.widgets.label</header>
@@ -2081,6 +2076,11 @@ background-color: rgb(255, 255, 255);</string>
    <class>PyDMLineEdit</class>
    <extends>QLineEdit</extends>
    <header>pydm.widgets.line_edit</header>
+  </customwidget>
+  <customwidget>
+   <class>TyphosRelatedSuiteButton</class>
+   <extends>QPushButton</extends>
+   <header>typhos.related_display</header>
   </customwidget>
  </customwidgets>
  <resources/>
