@@ -18,4 +18,5 @@ QGroupBox#NFImageGroupBox, QGroupBox#FFImageGroupBox{
 QFrame#M1Frame, QFrame#M2Frame{
     border: 1px solid black;
     padding: 5px;
+    margin: 5px;
 }
