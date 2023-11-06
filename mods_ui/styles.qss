@@ -4,7 +4,8 @@ QLabel#headerLabel{
 }
 
 QGroupBox#M1VGroupBox, QGroupBox#M2VGroupBox{
-    border-right: 1px solid black;
+    border: solid black;
+    border-width: 0px 1px 0px 0px;
 }
 
 QGroupBox#NFImageGroupBox, QGroupBox#FFImageGroupBox{
