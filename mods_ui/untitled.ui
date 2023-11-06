@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>954</width>
+    <width>1026</width>
     <height>615</height>
    </rect>
   </property>
@@ -1332,10 +1332,10 @@
           <enum>PyDMImageView::Clike</enum>
          </property>
          <property name="imageChannel" stdset="0">
-          <string>ca://LM1K4:COM_DP1_TF1_NF1:IMAGE1:ArrayData</string>
+          <string/>
          </property>
          <property name="widthChannel" stdset="0">
-          <string>ca://LM1K4:COM_DP1_TF1_NF1:IMAGE1:ArraySize0_RBV</string>
+          <string/>
          </property>
          <property name="maxRedrawRate" stdset="0">
           <number>30</number>
@@ -1484,10 +1484,10 @@
           <enum>PyDMImageView::Clike</enum>
          </property>
          <property name="imageChannel" stdset="0">
-          <string>ca://LM1K4:COM_DP1_TF1_FF1:IMAGE1:ArrayData</string>
+          <string/>
          </property>
          <property name="widthChannel" stdset="0">
-          <string>ca://LM1K4:COM_DP1_TF1_FF1:IMAGE1:ArraySize0_RBV</string>
+          <string/>
          </property>
          <property name="showAxes" stdset="0">
           <bool>false</bool>
