@@ -16,18 +16,23 @@ class CamIOC:
         base_pv,
         classification,
         protocol="ca://",
-        image_pv="IMAGE1:ArrayData",
-        width_pv="IMAGE1:ArraySize0_RBV",
-        bits_pv="BitsPerPixel_RBV",
+        image_pv_suffix="IMAGE1:ArrayData",
+        width_pv_suffix="IMAGE1:ArraySize0_RBV",
+        bits_pv_suffix="BitsPerPixel_RBV",
     ):
         self.base_pv = base_pv
         self.classification = classification
         self.protocal = protocol
-        self.image_pv = image_pv
-        self.width_pv = width_pv
-        self.bits_pv = bits_pv
-        self.image_ca = self.protocal + self.base_pv + self.image_pv
-        self.width_ca = self.protocal + self.base_pv + self.width_pv
+        self.image_pv = self.base_pv + image_pv_suffix
+        self.width_pv = self.base_pv + width_pv_suffix
+        self.bits_pv = self.base_pv + bits_pv_suffix
+        self.image_ca = self.protocal + self.image_pv
+        self.width_ca = self.protocal + self.width_pv
+        self.bits = EpicsSignalRO(read_pv=self.base_pv)
+        self.maxcolor = (1 << self.bits.get()) - 1
+
+    def set_image_object(self, image_object):
+        self.image_object = image_object
 
 
 class testScreen(pydm.Display):
@@ -45,20 +50,20 @@ class testScreen(pydm.Display):
         self.ui.FFImageView.imageChannel = self.FF_cam.image_ca
         self.ui.NFImageView.widthChannel = self.NF_cam.width_ca
         self.ui.FFImageView.widthChannel = self.FF_cam.width_ca
+        self.NF_cam.set_image_object(self.ui.NFImageView)
+        self.FF_cam.set_image_object(self.ui.FFImageView)
         self.ui.NFImageSettingsPushButton.clicked.connect(
-            lambda: self.load_image_settings(self.ui.NFImageView)
+            lambda: self.load_image_settings(self.NF_cam)
         )
         self.ui.FFImageSettingsPushButton.clicked.connect(
-            lambda: self.load_image_settings(self.ui.FFImageView)
+            lambda: self.load_image_settings(self.FF_cam)
         )
         self.ui.NFSavePushButton.clicked.connect(
-            lambda: self.save_image(self.ui.NFImageView)
+            lambda: self.save_image(self.NF_cam.image_object)
         )
         self.ui.FFSavePushButton.clicked.connect(
-            lambda: self.save_image(self.ui.FFImageView)
+            lambda: self.save_image(self.FF_cam.image_object)
         )
-        self.nf_bits = EpicsSignalRO(read_pv=self.NF_cam.bits_pv)
-        self.nf_maxcolor = (1 << self.nf_bits.get()) - 1
         self.show()
 
     def ui_filename(self):
@@ -78,24 +83,30 @@ class testScreen(pydm.Display):
         image_data = image_object.getImageItem().image
         np.save("saved_image.npy", image_data)
 
-    def load_image_settings(self, image_object):
+    def load_image_settings(self, cam_object):
         screen = imageSettingsScreen()
-        screen.ui.minLineEdit.setText(str(image_object.colorMapMin))
-        screen.ui.maxLineEdit.setText(str(image_object.colorMapMax))
-        screen.ui.XLineEdit.setText(str(image_object.roi.pos().x()))
-        screen.ui.YLineEdit.setText(str(image_object.roi.pos().y()))
-        screen.ui.WLineEdit.setText(str(image_object.roi.size().x()))
-        screen.ui.HLineEdit.setText(str(image_object.roi.size().y()))
-        screen.ui.normalizeCheckBox.setChecked(image_object.normalizeData)
-        screen.ui.minSlider.setMaximum(self.nf_maxcolor)
-        screen.ui.maxSlider.setMaximum(self.nf_maxcolor)
+        screen.ui.minLineEdit.setText(str(cam_object.image_object.colorMapMin))
+        screen.ui.maxLineEdit.setText(str(cam_object.image_object.colorMapMax))
+        screen.ui.XLineEdit.setText(str(cam_object.image_object.roi.pos().x()))
+        screen.ui.YLineEdit.setText(str(cam_object.image_object.roi.pos().y()))
+        screen.ui.WLineEdit.setText(
+            str(cam_object.image_object.roi.size().x())
+        )
+        screen.ui.HLineEdit.setText(
+            str(cam_object.image_object.roi.size().y())
+        )
+        screen.ui.normalizeCheckBox.setChecked(
+            cam_object.image_object.normalizeData
+        )
+        screen.ui.minSlider.setMaximum(cam_object.maxcolor)
+        screen.ui.maxSlider.setMaximum(cam_object.maxcolor)
         screen.show()
         screen.ui.buttonBox.accepted.connect(
-            lambda: self.apply_image_settings(screen, image_object)
+            lambda: self.apply_image_settings(screen, cam_object)
         )
         screen.ui.buttonBox.rejected.connect(screen.close)
 
-    def apply_image_settings(self, screen, image_object):
+    def apply_image_settings(self, screen, cam_object):
         try:
             self.color_map_min_val = float(screen.ui.minLineEdit.text())
             self.color_map_max_val = float(screen.ui.maxLineEdit.text())
@@ -118,16 +129,16 @@ class testScreen(pydm.Display):
             msg.exec_()
         if screen.no_errors is True:
             if self.autoset_val:
-                self.autoset_colormap(image_object)
+                self.autoset_colormap(cam_object.image_object)
             else:
-                image_object.colorMapMin = self.color_map_min_val
-                image_object.colorMapMax = self.color_map_max_val
-            image_object.normalizeData = self.normalize_val
+                cam_object.image_object.colorMapMin = self.color_map_min_val
+                cam_object.image_object.colorMapMax = self.color_map_max_val
+            cam_object.image_object.normalizeData = self.normalize_val
             roi_pos = pg.Point(
                 self.ROI_position_x_val, self.ROI_position_y_val
             )
             roi_size = pg.Point(self.ROI_range_x_val, self.ROI_range_y_val)
-            image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
+            cam_object.image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
             screen.close()
 
 
