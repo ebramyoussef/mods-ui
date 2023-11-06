@@ -33,12 +33,12 @@ class testScreen(pydm.Display):
         self.FF_cam = CamIOC(
             base_pv="LM1K4:COM_DP1_TF1_FF1:", classification="FF"
         )
-        self.ui.NFImageView = pydm.widgets.image.ImageView(
+        self.ui.NFImageView = pydm.widgets.image.PyDMImageView(
             parent=self,
             image_channel=self.NF_cam.image_ca,
             width_channel=self.NF_cam.width_ca,
         )
-        self.ui.FFImageView = pydm.widgets.image.ImageView(
+        self.ui.FFImageView = pydm.widgets.image.PyDMImageView(
             parent=self,
             image_channel=self.FF_cam.image_ca,
             width_channel=self.FF_cam.width_ca,
