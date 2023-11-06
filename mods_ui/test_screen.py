@@ -56,6 +56,7 @@ class testScreen(pydm.Display):
         self.ui.FFImageView.view.invertX(False)
         self.ui.FFImageView.view.invertY(False)
         self.ui.NFImageView.readingOrder = 1
+        self.orientation_idx = 0
         self.NF_cam.set_image_object(self.ui.NFImageView)
         self.FF_cam.set_image_object(self.ui.FFImageView)
         self.ui.NFImageSettingsPushButton.clicked.connect(
@@ -70,7 +71,6 @@ class testScreen(pydm.Display):
         self.ui.FFSavePushButton.clicked.connect(
             lambda: self.save_image(self.FF_cam.image_object)
         )
-        self.orientation_idx = None
         self.show()
 
     def ui_filename(self):
@@ -105,10 +105,7 @@ class testScreen(pydm.Display):
         screen.ui.normalizeCheckBox.setChecked(
             cam_object.image_object.normalizeData
         )
-        if self.orientation_idx is None:
-            screen.ui.orientationComboBox.setCurrentIndex(0)
-        else:
-            screen.ui.orientationComboBox.setCurrentIndex(self.orientation_idx)
+        screen.ui.orientationComboBox.setCurrentIndex(self.orientation_idx)
         screen.ui.minSlider.setMaximum(cam_object.maxcolor)
         screen.ui.minSlider.setValue(int(cam_object.image_object.colorMapMin))
         screen.ui.minSlider.setTickInterval(
@@ -167,15 +164,15 @@ class testScreen(pydm.Display):
         elif orientation_idx == 1:
             cam_object.image_object.readingOrder = 0
             cam_object.image_object.view.invertX(False)
-            cam_object.image_object.view.invertY(False)
+            cam_object.image_object.view.invertY(True)
         elif orientation_idx == 2:
             cam_object.image_object.readingOrder = 1
             cam_object.image_object.view.invertX(True)
             cam_object.image_object.view.invertY(True)
         elif orientation_idx == 3:
             cam_object.image_object.readingOrder = 0
-            cam_object.image_object.view.invertX(True)
-            cam_object.image_object.view.invertY(True)
+            cam_object.image_object.view.invertX(False)
+            cam_object.image_object.view.invertY(False)
         elif orientation_idx == 4:
             cam_object.image_object.readingOrder = 1
             cam_object.image_object.view.invertX(True)
