@@ -66,7 +66,6 @@ class testScreen(pydm.Display):
         )
         self.orientation_idx = None
         self.show()
-        print(self.ui.NFImageView.readingOrder)
 
     def ui_filename(self):
         return "untitled.ui"
@@ -154,19 +153,31 @@ class testScreen(pydm.Display):
             self.apply_orientation(cam_object, self.orientation_idx)
             screen.close()
 
-    # def apply_orientation(self, cam_object, orientation_idx):
-    #     if orientation_idx == 0:
-    #         cam_object.image_object.Reading
-    #     elif orientation_idx == 1:
-    #         pass
-    #     elif orientation_idx == 2:
-    #         pass
-    #     elif orientation_idx == 3:
-    #         pass
-    #     elif orientation_idx == 4:
-    #         pass
-    #     elif orientation_idx == 5:
-    #         pass
+    def apply_orientation(self, cam_object, orientation_idx):
+        if orientation_idx == 0:
+            cam_object.image_object.readingOrder = 1
+            cam_object.image_object.view.invertX(False)
+            cam_object.image_object.view.invertY(False)
+        elif orientation_idx == 1:
+            cam_object.image_object.readingOrder = 0
+            cam_object.image_object.view.invertX(False)
+            cam_object.image_object.view.invertY(False)
+        elif orientation_idx == 2:
+            cam_object.image_object.readingOrder = 1
+            cam_object.image_object.view.invertX(True)
+            cam_object.image_object.view.invertY(True)
+        elif orientation_idx == 3:
+            cam_object.image_object.readingOrder = 0
+            cam_object.image_object.view.invertX(True)
+            cam_object.image_object.view.invertY(True)
+        elif orientation_idx == 4:
+            cam_object.image_object.readingOrder = 1
+            cam_object.image_object.view.invertX(True)
+            cam_object.image_object.view.invertY(False)
+        elif orientation_idx == 5:
+            cam_object.image_object.readingOrder = 1
+            cam_object.image_object.view.invertX(False)
+            cam_object.image_object.view.invertY(True)
 
 
 class imageSettingsScreen(QtWidgets.QWidget):
