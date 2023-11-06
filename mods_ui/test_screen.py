@@ -1,5 +1,5 @@
 from os import path
-from pydm import Display
+import pydm
 from PyQt5.QtWidgets import QApplication
 from ophyd import EpicsSignal, EpicsSignalRO, EpicsSignalWithRBV
 import sys
@@ -22,7 +22,7 @@ class CamIOC:
     width_ca: str = protocal + base_pv + width_pv
 
 
-class testScreen(Display):
+class testScreen(pydm.Display):
     def __init__(self, parent=None, args=None, macros=None):
         super(testScreen, self).__init__(
             parent=parent, args=args, macros=macros
@@ -33,10 +33,16 @@ class testScreen(Display):
         self.FF_cam = CamIOC(
             base_pv="LM1K4:COM_DP1_TF1_FF1:", classification="FF"
         )
-        self.ui.NFImageView.imageChannel(value=self.NF_cam.image_ca)
-        self.ui.NFImageView.widthChannel(value=self.NF_cam.width_ca)
-        self.ui.FFImageView.imageChannel(value=self.FF_cam.image_ca)
-        self.ui.FFImageView.widthChannel(value=self.FF_cam.width_ca)
+        self.ui.NFImageView = pydm.widgets.image.ImageView(
+            parent=self,
+            image_channel=self.NF_cam.image_ca,
+            width_channel=self.NF_cam.width_ca,
+        )
+        self.ui.FFImageView = pydm.widgets.image.ImageView(
+            parent=self,
+            image_channel=self.FF_cam.image_ca,
+            width_channel=self.FF_cam.width_ca,
+        )
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.ui.NFImageView)
         )
