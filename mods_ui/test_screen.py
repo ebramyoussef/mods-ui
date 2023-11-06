@@ -158,6 +158,8 @@ class imageSettingsScreen(QtWidgets.QWidget):
         self.no_errors = True
         self.ui.minSlider.valueChanged.connect(self.onMinSliderChanged)
         self.ui.maxSlider.valueChanged.connect(self.onMaxSliderChanged)
+        self.ui.minLineEdit.returnPressed.connect(self.onMinLineEditReturned)
+        self.ui.maxLineEdit.returnPressed.connect(self.onMaxLineEditReturned)
 
     def onMinSliderChanged(self, value):
         self.ui.minLineEdit.setText(str(value))
@@ -168,6 +170,28 @@ class imageSettingsScreen(QtWidgets.QWidget):
         self.ui.maxLineEdit.setText(str(value))
         if value < self.ui.minSlider.value():
             self.ui.minSlider.setValue(value)
+
+    def onMinLineEditReturned(self):
+        try:
+            value = int(self.ui.minLineEdit.text())
+        except Exception:
+            value = 0
+        if value < 0:
+            value = 0
+        if value > self.ui.minSlider.maximum():
+            value = self.ui.minSlider.maximum()
+        self.ui.minSlider.setValue(value)
+
+    def onMaxLineEditReturned(self):
+        try:
+            value = int(self.ui.maxLineEdit.text())
+        except Exception:
+            value = 0
+        if value < 0:
+            value = 0
+        if value > self.ui.maxSlider.maximum():
+            value = self.ui.maxSlider.maximum()
+        self.ui.maxSlider.setValue(value)
 
 
 if __name__ == "__main__":
