@@ -43,10 +43,10 @@ class testScreen(pydm.Display):
         #     image_channel=self.FF_cam.image_ca,
         #     width_channel=self.FF_cam.width_ca,
         # )
-        self.ui.NFImageView._imagechannel = self.NF_cam.image_ca
-        self.ui.FFImageView._imagechannel = self.FF_cam.image_ca
-        self.ui.NFImageView._widthchannel = self.NF_cam.width_ca
-        self.ui.FFImageView._widthChannel = self.FF_cam.width_ca
+        self.ui.NFImageView.imageChannel.setter(self.NF_cam.image_ca)
+        self.ui.FFImageView.imageChannel.setter(self.FF_cam.image_ca)
+        self.ui.NFImageView.widthChannel.setter(self.NF_cam.width_ca)
+        self.ui.FFImageView.widthChannel.setter(self.FF_cam.width_ca)
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.ui.NFImageView)
         )
