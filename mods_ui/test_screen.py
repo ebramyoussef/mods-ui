@@ -99,7 +99,9 @@ class testScreen(pydm.Display):
             cam_object.image_object.normalizeData
         )
         screen.ui.minSlider.setMaximum(cam_object.maxcolor)
+        screen.ui.minSlider.setTickInterval((1 << cam_object.bits) / 4)
         screen.ui.maxSlider.setMaximum(cam_object.maxcolor)
+        screen.ui.maxSlider.setTickInterval((1 << cam_object.bits) / 4)
         screen.show()
         screen.ui.buttonBox.accepted.connect(
             lambda: self.apply_image_settings(screen, cam_object)
@@ -148,6 +150,18 @@ class imageSettingsScreen(QtWidgets.QWidget):
         self.ui = Ui_imageSettingsForm()
         self.ui.setupUi(self)
         self.no_errors = True
+        self.ui.minSlider.valueChanged.connect(self.onMinSliderChanged)
+        self.ui.maxSlider.valueChanged.connect(self.onMaxSliderChanged)
+
+    def onMinSliderChanged(self, value):
+        self.ui.minLineEdit.setText(str(value))
+        if value > self.ui.maxSlider.value():
+            self.ui.maxSlider.setValue(value)
+
+    def onMaxSliderChanged(self, value):
+        self.ui.maxLineEdit.setText(str(value))
+        if value < self.ui.minSlider.value():
+            self.ui.minSlider.setValue(value)
 
 
 if __name__ == "__main__":
