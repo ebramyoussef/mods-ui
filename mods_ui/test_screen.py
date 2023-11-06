@@ -7,6 +7,19 @@ from PyQt5 import QtWidgets
 from image_settings_2 import Ui_imageSettingsForm
 import pyqtgraph as pg
 import numpy as np
+from dataclasses import dataclass
+
+
+@dataclass
+class CamIOC:
+    base_pv: str = "LM1K4:COM_DP1_TF1_NF1:"
+    classification: str = "NF"
+    protocal: str = "ca://"
+    image_pv: str = "IMAGE1:ArrayData"
+    width_pv: str = "IMAGE1:ArraySize0_RBV"
+    bits_pv: str = "BIT_DEPTH"
+    image_ca: str = protocal + base_pv + image_pv
+    width_ca: str = protocal + base_pv + width_pv
 
 
 class testScreen(Display):
@@ -14,6 +27,14 @@ class testScreen(Display):
         super(testScreen, self).__init__(
             parent=parent, args=args, macros=macros
         )
+        self.NF_cam = CamIOC(
+            base_pv="LM1K4:COM_DP1_TF1_NF1:", classification="NF"
+        )
+        self.FF_cam = CamIOC(
+            base_pv="LM1K4:COM_DP1_TF1_FF1:", classification="FF"
+        )
+        self.ui.NFImageView.imageChannel = self.NF_cam.image_ca
+        self.ui.FFImageView.imageChannel = self.FF_cam.image_ca
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.ui.NFImageView)
         )
@@ -27,6 +48,7 @@ class testScreen(Display):
             lambda: self.save_image(self.ui.FFImageView)
         )
         self.nf_bits = EpicsSignalRO("LM1K4:COM_DP1_TF1_NF1:BIT_DEPTH")
+        self.nf_maxcolor = (1 << self.nf_bits.get()) - 1
         self.show()
 
     def ui_filename(self):
