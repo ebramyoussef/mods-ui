@@ -33,10 +33,10 @@ class testScreen(Display):
         self.FF_cam = CamIOC(
             base_pv="LM1K4:COM_DP1_TF1_FF1:", classification="FF"
         )
-        self.ui.NFImageView.image_channel = self.NF_cam.image_ca
-        self.ui.NFImageView.width_channel = self.NF_cam.width_ca
-        self.ui.FFImageView.image_channel = self.FF_cam.image_ca
-        self.ui.FFImageView.width_channel = self.FF_cam.width_ca
+        self.ui.NFImageView.imageChannel(self.NF_cam.image_ca)
+        self.ui.NFImageView.widthChannel(self.NF_cam.width_ca)
+        self.ui.FFImageView.imageChannel(self.FF_cam.image_ca)
+        self.ui.FFImageView.widthChannel(self.FF_cam.width_ca)
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.ui.NFImageView)
         )
