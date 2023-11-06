@@ -110,7 +110,7 @@ class testScreen(pydm.Display):
             screen.ui.orientationComboBox.setCurrentIndex(
                 self.nf_orientation_idx
             )
-        elif cam_object.classification == "NF":
+        elif cam_object.classification == "FF":
             screen.ui.orientationComboBox.setCurrentIndex(
                 self.ff_orientation_idx
             )
