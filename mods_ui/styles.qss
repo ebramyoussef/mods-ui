@@ -16,10 +16,11 @@ QFrame#M1Frame, QFrame#M2Frame{
     padding: 10px;
     margin: 5px;
 }
-
+QGroupBox#M1VGroupBox, QGroupBox#M2VGroupBox, QGroupBox#M1HGroupBox, QGroupBox#M2HGroupBox{
+    padding: 5px;
+    margin: 5px;
+}
 QGroupBox#M1VGroupBox, QGroupBox#M2VGroupBox{
     border: solid black;
     border-width: 0px 1px 0px 0px;
-    padding: initial;
-    margin: initial;
 }
