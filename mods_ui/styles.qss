@@ -6,6 +6,8 @@ QLabel#headerLabel{
 QGroupBox#M1VGroupBox, QGroupBox#M2VGroupBox{
     border: solid black;
     border-width: 0px 1px 0px 0px;
+    padding: initial;
+    margin: initial;
 }
 
 QGroupBox#NFImageGroupBox, QGroupBox#FFImageGroupBox{
