@@ -55,8 +55,8 @@ class testScreen(pydm.Display):
         self.ui.FFSavePushButton.clicked.connect(
             lambda: self.save_image(self.ui.FFImageView)
         )
-        self.nf_bits = EpicsSignalRO("LM1K4:COM_DP1_TF1_NF1:BIT_DEPTH")
-        self.nf_maxcolor = (1 << self.nf_bits.get()) - 1
+        # self.nf_bits = EpicsSignalRO("LM1K4:COM_DP1_TF1_NF1:BIT_DEPTH")
+        # self.nf_maxcolor = (1 << self.nf_bits.get()) - 1
         self.show()
 
     def ui_filename(self):
