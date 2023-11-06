@@ -33,15 +33,27 @@ class testScreen(pydm.Display):
         self.FF_cam = CamIOC(
             base_pv="LM1K4:COM_DP1_TF1_FF1:", classification="FF"
         )
-        self.ui.NFImageView = pydm.widgets.image.PyDMImageView(
-            parent=self,
-            image_channel=self.NF_cam.image_ca,
-            width_channel=self.NF_cam.width_ca,
+        # self.ui.NFImageView = pydm.widgets.image.PyDMImageView(
+        #     parent=self,
+        #     image_channel=self.NF_cam.image_ca,
+        #     width_channel=self.NF_cam.width_ca,
+        # )
+        # self.ui.FFImageView = pydm.widgets.image.PyDMImageView(
+        #     parent=self,
+        #     image_channel=self.FF_cam.image_ca,
+        #     width_channel=self.FF_cam.width_ca,
+        # )
+        self.ui.NFImageView.imageChannel(
+            self.ui.NFImageView, value=self.NF_cam.image_ca
         )
-        self.ui.FFImageView = pydm.widgets.image.PyDMImageView(
-            parent=self,
-            image_channel=self.FF_cam.image_ca,
-            width_channel=self.FF_cam.width_ca,
+        self.ui.FFImageView.imageChannel(
+            self.ui.FFImageView, value=self.FF_cam.image_ca
+        )
+        self.ui.NFImageView.widthChannel(
+            self.ui.NFImageView, value=self.NF_cam.width_ca
+        )
+        self.ui.FFImageView.widthChannel(
+            self.ui.FFImageView, value=self.FF_cam.width_ca
         )
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.ui.NFImageView)
