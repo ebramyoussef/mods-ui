@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>453</width>
-    <height>309</height>
+    <height>311</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -127,45 +127,37 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QRadioButton" name="noneRadioButton">
-        <property name="text">
-         <string>None</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="ninetyRadioButton">
-        <property name="text">
-         <string>90deg</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="hundredEightyRadioButton">
-        <property name="text">
-         <string>180deg</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="twoHundredSeventyRadioButton">
-        <property name="text">
-         <string>270deg</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="flipHRadioButton">
-        <property name="text">
-         <string>Flip H</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="flipVRadioButton">
-        <property name="text">
-         <string>Flip V</string>
-        </property>
+       <widget class="QComboBox" name="orientationComboBox">
+        <item>
+         <property name="text">
+          <string>None</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>90deg</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>180deg</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>270deg</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Flip H</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Flip V</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>
