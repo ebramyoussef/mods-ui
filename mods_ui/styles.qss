@@ -9,9 +9,11 @@ QGroupBox#M1VGroupBox, QGroupBox#M2VGroupBox{
 
 QGroupBox#NFImageGroupBox, QGroupBox#FFImageGroupBox{
     border: 1px solid black;
+    padding: 5px;
 }
 
 
-QGridLayout#M1GridLayout, QGridLayout#M2GridLayout{
+QFrame#M1Frame, QFrame#M2Frame{
     border: 1px solid black;
+    padding: 5px;
 }
