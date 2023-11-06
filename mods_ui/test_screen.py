@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QApplication
 from ophyd import EpicsSignal, EpicsSignalRO, EpicsSignalWithRBV
 import sys
 from PyQt5 import QtWidgets
-from image_settings_2 import Ui_imageSettingsForm
+from image_settings_2_ui import Ui_imageSettingsForm
 import pyqtgraph as pg
 import numpy as np
 from dataclasses import dataclass
@@ -64,7 +64,9 @@ class testScreen(pydm.Display):
         self.ui.FFSavePushButton.clicked.connect(
             lambda: self.save_image(self.FF_cam.image_object)
         )
+        self.orientation_idx = None
         self.show()
+        print(self.ui.NFImageView.readingOrder)
 
     def ui_filename(self):
         return "untitled.ui"
@@ -98,6 +100,10 @@ class testScreen(pydm.Display):
         screen.ui.normalizeCheckBox.setChecked(
             cam_object.image_object.normalizeData
         )
+        if self.orientation_idx is None:
+            screen.ui.orientationComboBox.setCurrentIndex(0)
+        else:
+            screen.ui.orientationComboBox.setCurrentIndex(self.orientation_idx)
         screen.ui.minSlider.setMaximum(cam_object.maxcolor)
         screen.ui.minSlider.setValue(int(cam_object.image_object.colorMapMin))
         screen.ui.minSlider.setTickInterval(
@@ -124,9 +130,7 @@ class testScreen(pydm.Display):
             self.ROI_range_x_val = float(screen.ui.WLineEdit.text())
             self.ROI_position_y_val = float(screen.ui.YLineEdit.text())
             self.ROI_range_y_val = float(screen.ui.HLineEdit.text())
-            # self.orientation_idx = int(
-            #     screen.ui.orientationComboBox.currentIndex()
-            # )
+            self.orientation_idx = screen.ui.orientationComboBox.currentIndex()
         except ValueError:
             screen.no_errors = False
             msg = QtWidgets.QMessageBox()
@@ -147,7 +151,22 @@ class testScreen(pydm.Display):
             )
             roi_size = pg.Point(self.ROI_range_x_val, self.ROI_range_y_val)
             cam_object.image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
+            self.apply_orientation(cam_object, self.orientation_idx)
             screen.close()
+
+    # def apply_orientation(self, cam_object, orientation_idx):
+    #     if orientation_idx == 0:
+    #         cam_object.image_object.Reading
+    #     elif orientation_idx == 1:
+    #         pass
+    #     elif orientation_idx == 2:
+    #         pass
+    #     elif orientation_idx == 3:
+    #         pass
+    #     elif orientation_idx == 4:
+    #         pass
+    #     elif orientation_idx == 5:
+    #         pass
 
 
 class imageSettingsScreen(QtWidgets.QWidget):
