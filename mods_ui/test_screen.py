@@ -57,8 +57,8 @@ class testScreen(pydm.Display):
         self.ui.FFSavePushButton.clicked.connect(
             lambda: self.save_image(self.ui.FFImageView)
         )
-        # self.nf_bits = EpicsSignalRO("LM1K4:COM_DP1_TF1_NF1:BIT_DEPTH")
-        # self.nf_maxcolor = (1 << self.nf_bits.get()) - 1
+        self.nf_bits = EpicsSignalRO(read_pv=self.NF_cam.bits_pv)
+        self.nf_maxcolor = (1 << self.nf_bits.get()) - 1
         self.show()
 
     def ui_filename(self):
@@ -87,7 +87,8 @@ class testScreen(pydm.Display):
         screen.ui.WLineEdit.setText(str(image_object.roi.size().x()))
         screen.ui.HLineEdit.setText(str(image_object.roi.size().y()))
         screen.ui.normalizeCheckBox.setChecked(image_object.normalizeData)
-        # screen.ui.minSlider.setMaximum()
+        screen.ui.minSlider.setMaximum(self.nf_maxcolor)
+        screen.ui.maxSlider.setMaximum(self.nf_maxcolor)
         screen.show()
         screen.ui.buttonBox.accepted.connect(
             lambda: self.apply_image_settings(screen, image_object)
