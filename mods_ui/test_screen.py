@@ -7,7 +7,6 @@ from PyQt5 import QtWidgets
 from image_settings_2_ui import Ui_imageSettingsForm
 import pyqtgraph as pg
 import numpy as np
-from dataclasses import dataclass
 
 
 class CamIOC:
@@ -19,6 +18,8 @@ class CamIOC:
         image_pv_suffix="IMAGE1:ArrayData",
         width_pv_suffix="IMAGE1:ArraySize0_RBV",
         bits_pv_suffix="BitsPerPixel_RBV",
+        centroidx_pv_suffix="Stats2:CentroidX_RBV",
+        centroidy_pv_suffix="Stats2:CentroidY_RBV",
     ):
         self.base_pv = base_pv
         self.classification = classification
@@ -28,6 +29,10 @@ class CamIOC:
         self.bits_pv = self.base_pv + bits_pv_suffix
         self.image_ca = self.protocal + self.image_pv
         self.width_ca = self.protocal + self.width_pv
+        self.centroidx_pv = self.base_pv + centroidx_pv_suffix
+        self.centroidy_pv = self.base_pv + centroidy_pv_suffix
+        self.centroidx_ca = self.protocal + self.centroidx_pv
+        self.centroidy_ca = self.protocal + self.centroidy_pv
         self.bits = EpicsSignalRO(read_pv=self.bits_pv)
         self.maxcolor = (1 << self.bits.get()) - 1
 
@@ -53,6 +58,10 @@ class testScreen(pydm.Display):
         self.ui.FFImageView.imageChannel = self.FF_cam.image_ca
         self.ui.NFImageView.widthChannel = self.NF_cam.width_ca
         self.ui.FFImageView.widthChannel = self.FF_cam.width_ca
+        self.ui.NFCXLabel.channel = self.NF_cam.centroidx_ca
+        self.ui.NFCYLabel.channel = self.NF_cam.centroidy_ca
+        self.ui.FFCXLabel.channel = self.FF_cam.centroidx_ca
+        self.ui.FFCYLabel.channel = self.FF_cam.centroidy_ca
         self.ui.NFImageView.view.invertX(False)
         self.ui.NFImageView.view.invertY(False)
         self.ui.NFImageView.readingOrder = 1
