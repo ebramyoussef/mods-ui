@@ -141,6 +141,10 @@ class testScreen(pydm.Display):
             self.ROI_position_y_val = float(screen.ui.YLineEdit.text())
             self.ROI_range_y_val = float(screen.ui.HLineEdit.text())
             orientation_idx = screen.ui.orientationComboBox.currentIndex()
+            if cam_object.classification == "NF":
+                self.nf_orientation_idx = orientation_idx
+            elif cam_object.classification == "FF":
+                self.ff_orientation_idx = orientation_idx
         except ValueError:
             screen.no_errors = False
             msg = QtWidgets.QMessageBox()
