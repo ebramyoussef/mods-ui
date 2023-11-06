@@ -28,7 +28,7 @@ class CamIOC:
         self.bits_pv = self.base_pv + bits_pv_suffix
         self.image_ca = self.protocal + self.image_pv
         self.width_ca = self.protocal + self.width_pv
-        self.bits = EpicsSignalRO(read_pv=self.base_pv)
+        self.bits = EpicsSignalRO(read_pv=self.bits_pv)
         self.maxcolor = (1 << self.bits.get()) - 1
 
     def set_image_object(self, image_object):
