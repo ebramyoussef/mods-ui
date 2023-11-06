@@ -10,16 +10,24 @@ import numpy as np
 from dataclasses import dataclass
 
 
-@dataclass
 class CamIOC:
-    base_pv: str = "LM1K4:COM_DP1_TF1_NF1:"
-    classification: str = "NF"
-    protocal: str = "ca://"
-    image_pv: str = "IMAGE1:ArrayData"
-    width_pv: str = "IMAGE1:ArraySize0_RBV"
-    bits_pv: str = "BIT_DEPTH"
-    image_ca: str = protocal + base_pv + image_pv
-    width_ca: str = protocal + base_pv + width_pv
+    def __init__(
+        self,
+        base_pv,
+        classification,
+        protocol="ca://",
+        image_pv="IMAGE1:ArrayData",
+        width_pv="IMAGE1:ArraySize0_RBV",
+        bits_pv="BitsPerPixel_RBV",
+    ):
+        self.base_pv = base_pv
+        self.classification = classification
+        self.protocal = protocol
+        self.image_pv = image_pv
+        self.width_pv = width_pv
+        self.bits_pv = bits_pv
+        self.image_ca = self.protocal + self.base_pv + self.image_pv
+        self.width_ca = self.protocal + self.base_pv + self.width_pv
 
 
 class testScreen(pydm.Display):
