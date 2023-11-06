@@ -54,7 +54,7 @@ class testScreen(pydm.Display):
         self.qss_file = "styles.qss"
         with open(self.qss_file, "r") as fh:
             self.setStyleSheet(fh.read())
-        self.resize(1200, 900)
+        self.resize(800, 650)
         self.ui.NFImageView.imageChannel = self.NF_cam.image_ca
         self.ui.FFImageView.imageChannel = self.FF_cam.image_ca
         self.ui.NFImageView.widthChannel = self.NF_cam.width_ca
