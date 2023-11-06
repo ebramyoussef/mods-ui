@@ -46,6 +46,9 @@ class testScreen(pydm.Display):
         self.FF_cam = CamIOC(
             base_pv="LM1K4:COM_DP1_TF1_FF1:", classification="FF"
         )
+        self.qss_file = "styles.qss"
+        with open(self.qss_file, "r") as fh:
+            self.setStyleSheet(fh.read())
         self.ui.NFImageView.imageChannel = self.NF_cam.image_ca
         self.ui.FFImageView.imageChannel = self.FF_cam.image_ca
         self.ui.NFImageView.widthChannel = self.NF_cam.width_ca
