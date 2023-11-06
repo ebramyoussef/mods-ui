@@ -3,7 +3,15 @@ QLabel#headerLabel{
     font-size: 24px;
 }
 
-QGroupBox::title{
-    text-align: center'
-    font-size: 20px;
+QGroupBox#M1VGroupBox, QGroupBox#M2VGroupBox{
+    border-right: 1px solid black;
+}
+
+QGroupBox#NFImageGroupBox, QGroupBox#FFImageGroupBox{
+    border: 1px solid black;
+}
+
+
+QGridLayout#M1GridLayout, QGridLayout#M2GridLayout{
+    border: 1px solid black;
 }
