@@ -99,9 +99,15 @@ class testScreen(pydm.Display):
             cam_object.image_object.normalizeData
         )
         screen.ui.minSlider.setMaximum(cam_object.maxcolor)
-        screen.ui.minSlider.setTickInterval((1 << cam_object.bits.get()) / 4)
+        screen.ui.minSlider.setValue(int(cam_object.image_object.colorMapMin())
+        screen.ui.minSlider.setTickInterval(
+            int((1 << cam_object.bits.get()) / 4)
+        )
         screen.ui.maxSlider.setMaximum(cam_object.maxcolor)
-        screen.ui.maxSlider.setTickInterval((1 << cam_object.bits.get()) / 4)
+        screen.ui.maxSlider.setTickInterval(
+            int((1 << cam_object.bits.get()) / 4)
+        )
+        screen.ui.maxSlider.setValue(int(cam_object.image_object.colorMapMax))
         screen.show()
         screen.ui.buttonBox.accepted.connect(
             lambda: self.apply_image_settings(screen, cam_object)
