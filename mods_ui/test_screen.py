@@ -99,7 +99,7 @@ class testScreen(pydm.Display):
             cam_object.image_object.normalizeData
         )
         screen.ui.minSlider.setMaximum(cam_object.maxcolor)
-        screen.ui.minSlider.setValue(int(cam_object.image_object.colorMapMin())
+        screen.ui.minSlider.setValue(int(cam_object.image_object.colorMapMin))
         screen.ui.minSlider.setTickInterval(
             int((1 << cam_object.bits.get()) / 4)
         )
