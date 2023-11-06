@@ -89,7 +89,7 @@ class testScreen(pydm.Display):
         screen.ui.WLineEdit.setText(str(image_object.roi.size().x()))
         screen.ui.HLineEdit.setText(str(image_object.roi.size().y()))
         screen.ui.normalizeCheckBox.setChecked(image_object.normalizeData)
-        screen.ui.minSlider.setMaximum()
+        # screen.ui.minSlider.setMaximum()
         screen.show()
         screen.ui.buttonBox.accepted.connect(
             lambda: self.apply_image_settings(screen, image_object)
