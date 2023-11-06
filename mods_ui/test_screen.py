@@ -84,7 +84,7 @@ class testScreen(pydm.Display):
         np.save("saved_image.npy", image_data)
 
     def load_image_settings(self, cam_object):
-        screen = imageSettingsScreen()
+        screen = imageSettingsScreen(cam_object)
         screen.ui.minLineEdit.setText(str(cam_object.image_object.colorMapMin))
         screen.ui.maxLineEdit.setText(str(cam_object.image_object.colorMapMax))
         screen.ui.XLineEdit.setText(str(cam_object.image_object.roi.pos().x()))
@@ -151,7 +151,7 @@ class testScreen(pydm.Display):
 
 
 class imageSettingsScreen(QtWidgets.QWidget):
-    def __init__(self):
+    def __init__(self, cam_object):
         super(imageSettingsScreen, self).__init__()
         self.ui = Ui_imageSettingsForm()
         self.ui.setupUi(self)
@@ -160,6 +160,7 @@ class imageSettingsScreen(QtWidgets.QWidget):
         self.ui.maxSlider.valueChanged.connect(self.onMaxSliderChanged)
         self.ui.minLineEdit.returnPressed.connect(self.onMinLineEditReturned)
         self.ui.maxLineEdit.returnPressed.connect(self.onMaxLineEditReturned)
+        self.cam_object = cam_object
 
     def onMinSliderChanged(self, value):
         self.ui.minLineEdit.setText(str(value))
@@ -178,8 +179,8 @@ class imageSettingsScreen(QtWidgets.QWidget):
             value = 0
         if value < 0:
             value = 0
-        if value > self.ui.minSlider.maximum():
-            value = self.ui.minSlider.maximum()
+        if value > self.cam_object.maxcolor:
+            value = self.cam_object.maxcolor
         self.ui.minSlider.setValue(value)
 
     def onMaxLineEditReturned(self):
@@ -189,8 +190,8 @@ class imageSettingsScreen(QtWidgets.QWidget):
             value = 0
         if value < 0:
             value = 0
-        if value > self.ui.maxSlider.maximum():
-            value = self.ui.maxSlider.maximum()
+        if value > self.cam_object.maxcolor:
+            value = self.cam_object.maxcolor
         self.ui.maxSlider.setValue(value)
 
 
