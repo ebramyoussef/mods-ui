@@ -56,7 +56,8 @@ class testScreen(pydm.Display):
         self.ui.FFImageView.view.invertX(False)
         self.ui.FFImageView.view.invertY(False)
         self.ui.NFImageView.readingOrder = 1
-        self.orientation_idx = 0
+        self.nf_orientation_idx = 0
+        self.ff_orientation_idx = 0
         self.NF_cam.set_image_object(self.ui.NFImageView)
         self.FF_cam.set_image_object(self.ui.FFImageView)
         self.ui.NFImageSettingsPushButton.clicked.connect(
@@ -105,7 +106,14 @@ class testScreen(pydm.Display):
         screen.ui.normalizeCheckBox.setChecked(
             cam_object.image_object.normalizeData
         )
-        screen.ui.orientationComboBox.setCurrentIndex(self.orientation_idx)
+        if cam_object.classification == "NF":
+            screen.ui.orientationComboBox.setCurrentIndex(
+                self.nf_orientation_idx
+            )
+        elif cam_object.classification == "NF":
+            screen.ui.orientationComboBox.setCurrentIndex(
+                self.ff_orientation_idx
+            )
         screen.ui.minSlider.setMaximum(cam_object.maxcolor)
         screen.ui.minSlider.setValue(int(cam_object.image_object.colorMapMin))
         screen.ui.minSlider.setTickInterval(
@@ -132,7 +140,7 @@ class testScreen(pydm.Display):
             self.ROI_range_x_val = float(screen.ui.WLineEdit.text())
             self.ROI_position_y_val = float(screen.ui.YLineEdit.text())
             self.ROI_range_y_val = float(screen.ui.HLineEdit.text())
-            self.orientation_idx = screen.ui.orientationComboBox.currentIndex()
+            orientation_idx = screen.ui.orientationComboBox.currentIndex()
         except ValueError:
             screen.no_errors = False
             msg = QtWidgets.QMessageBox()
@@ -153,7 +161,7 @@ class testScreen(pydm.Display):
             )
             roi_size = pg.Point(self.ROI_range_x_val, self.ROI_range_y_val)
             cam_object.image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
-            self.apply_orientation(cam_object, self.orientation_idx)
+            self.apply_orientation(cam_object, orientation_idx)
             screen.close()
 
     def apply_orientation(self, cam_object, orientation_idx):
