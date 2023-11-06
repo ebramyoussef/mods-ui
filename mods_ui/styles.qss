@@ -3,12 +3,6 @@ QLabel#headerLabel{
     font-size: 24px;
 }
 
-QGroupBox#M1VGroupBox, QGroupBox#M2VGroupBox{
-    border: solid black;
-    border-width: 0px 1px 0px 0px;
-    padding: initial;
-    margin: initial;
-}
 
 QGroupBox#NFImageGroupBox, QGroupBox#FFImageGroupBox{
     border: 1px solid black;
@@ -21,4 +15,11 @@ QFrame#M1Frame, QFrame#M2Frame{
     border: 1px solid black;
     padding: 10px;
     margin: 5px;
+}
+
+QGroupBox#M1VGroupBox, QGroupBox#M2VGroupBox{
+    border: solid black;
+    border-width: 0px 1px 0px 0px;
+    padding: initial;
+    margin: initial;
 }
