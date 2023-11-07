@@ -107,10 +107,10 @@ class testScreen(pydm.Display):
             lambda: self.load_image_settings(self.FF_cam)
         )
         self.ui.NFRefSettingsPushButton.clicked.connect(
-            lambda: self.load_ref_settings(self.ui.NFRefView)
+            lambda: self.load_ref_settings(self.ui.NFRefView, "NF")
         )
         self.ui.FFRefSettingsPushButton.clicked.connect(
-            lambda: self.load_ref_settings(self.ui.FFRefView)
+            lambda: self.load_ref_settings(self.ui.FFRefView, "FF")
         )
         self.ui.NFSavePushButton.clicked.connect(
             lambda: self.save_image(self.NF_cam.image_object)
