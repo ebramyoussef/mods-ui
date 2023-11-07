@@ -21,6 +21,8 @@ class CamIOC:
         bits_pv_suffix="BitsPerPixel_RBV",
         centroidx_pv_suffix="Stats2:CentroidX_RBV",
         centroidy_pv_suffix="Stats2:CentroidY_RBV",
+        sigmax_pv_suffix="Stats2:SigmaX_RBV",
+        sigmay_pv_suffix="Stats2:SigmaY_RBV",
     ):
         self.base_pv = base_pv
         self.classification = classification
@@ -34,11 +36,50 @@ class CamIOC:
         self.centroidy_pv = self.base_pv + centroidy_pv_suffix
         self.centroidx_ca = self.protocal + self.centroidx_pv
         self.centroidy_ca = self.protocal + self.centroidy_pv
+        self.sigmax_pv = self.base_pv + sigmax_pv_suffix
+        self.sigmay_pv = self.base_pv + sigmay_pv_suffix
+        self.sigmax_ca = self.protocal + self.sigmax_pv
+        self.sigmay_ca = self.protocal + self.sigmay_pv
         self.bits = EpicsSignalRO(read_pv=self.bits_pv)
         self.maxcolor = (1 << self.bits.get()) - 1
 
     def set_image_object(self, image_object):
         self.image_object = image_object
+
+
+class MirrorIOC:
+    def __init__(
+        self,
+        base_pv,
+        protocol="ca://",
+        stepsize_pv_suffix="STEP_COUNT",
+        steptotal_pv_suffix="TOTAL_STEP_COUNT",
+        stepreverse_pv_suffix="STEP_REVERSE",
+        stepforward_pv_suffix="STEP_FORWARD",
+        indicator_pv_suffix=":PROC",
+    ):
+        self.base_pv = base_pv
+        self.protocol = protocol
+        self.stepsize_pv = self.base_pv + stepsize_pv_suffix
+        self.steptotal_pv = self.base_pv + steptotal_pv_suffix
+        self.stepreverse_pv = self.base_pv + stepreverse_pv_suffix
+        self.stepforward_pv = self.base_pv + stepforward_pv_suffix
+        self.stepreverse_indicator_pv = (
+            self.stepreverse_pv + indicator_pv_suffix
+        )
+        self.stepforward_indicator_pv = (
+            self.stepforward_pv + indicator_pv_suffix
+        )
+        self.stepsize_ca = self.protocol + self.stepsize_pv
+        self.steptotal_ca = self.protocol + self.steptotal_pv
+        self.stepreverse_ca = self.protocol + self.stepreverse_pv
+        self.stepforward_ca = self.protocol + self.stepforward_pv
+        self.stepreverse_indicator_ca = (
+            self.protocol + self.stepreverse_indicator_pv
+        )
+        self.stepforward_indicator_ca = (
+            self.protocol + self.stepforward_indicator_pv
+        )
 
 
 class testScreen(pydm.Display):
@@ -52,6 +93,10 @@ class testScreen(pydm.Display):
         self.FF_cam = CamIOC(
             base_pv="LM1K4:COM_DP1_TF1_FF1:", classification="FF"
         )
+        self.M1_tip = MirrorIOC(base_pv="LM1K4:COM_MP1_MR1_TIP1:")
+        self.M1_tilt = MirrorIOC(base_pv="LM1K4:COM_MP1_MR1_TILT1:")
+        self.M2_tip = MirrorIOC(base_pv="LM1K4:COM_MP1_MR4_TIP1:")
+        self.M2_tilt = MirrorIOC(base_pv="LM1K4:COM_MP1_MR4_TILT1:")
         self.qss_file = "styles.qss"
         with open(self.qss_file, "r") as fh:
             self.setStyleSheet(fh.read())
@@ -76,6 +121,38 @@ class testScreen(pydm.Display):
         self.ui.NFCYLabel.channel = self.NF_cam.centroidy_ca
         self.ui.FFCXLabel.channel = self.FF_cam.centroidx_ca
         self.ui.FFCYLabel.channel = self.FF_cam.centroidy_ca
+        self.ui.NFSXLabel.channel = self.NF_cam.sigmax_ca
+        self.ui.NFSYLabel.channel = self.NF_cam.sigmay_ca
+        self.ui.FFSXLabel.channel = self.FF_cam.sigmax_ca
+        self.ui.FFSYLabel.channel = self.FF_cam.sigmay_ca
+        self.ui.M1VStepLineEdit.channel = self.M1_tip.stepsize_ca
+        self.ui.M1VStepLabel.channel = self.M1_tip.stepsize_ca
+        self.ui.M1VRevPushButton.channel = self.M1_tip.stepreverse_ca
+        self.ui.M1VRevIndicator.channel = self.M1_tip.stepreverse_indicator_ca
+        self.ui.M1VFwdPushButton.channel = self.M1_tip.stepforward_ca
+        self.ui.M1VFwdIndicator.channel = self.M1_tip.stepforward_indicator_ca
+        self.ui.M1VTotalLabel.channel = self.M1_tip.steptotal_ca
+        self.ui.M1HStepLineEdit.channel = self.M1_tilt.stepsize_ca
+        self.ui.M1HStepLabel.channel = self.M1_tilt.stepsize_ca
+        self.ui.M1HRevPushButton.channel = self.M1_tilt.stepreverse_ca
+        self.ui.M1HRevIndicator.channel = self.M1_tilt.stepreverse_indicator_ca
+        self.ui.M1HFwdPushButton.channel = self.M1_tilt.stepforward_ca
+        self.ui.M1HFwdIndicator.channel = self.M1_tilt.stepforward_indicator_ca
+        self.ui.M1HTotalLabel.channel = self.M1_tilt.steptotal_ca
+        self.ui.M2VStepLineEdit.channel = self.M2_tip.stepsize_ca
+        self.ui.M2VStepLabel.channel = self.M2_tip.stepsize_ca
+        self.ui.M2VRevPushButton.channel = self.M2_tip.stepreverse_ca
+        self.ui.M2VRevIndicator.channel = self.M2_tip.stepreverse_indicator_ca
+        self.ui.M2VFwdPushButton.channel = self.M2_tip.stepforward_ca
+        self.ui.M2VFwdIndicator.channel = self.M2_tip.stepforward_indicator_ca
+        self.ui.M2VTotalLabel.channel = self.M2_tip.steptotal_ca
+        self.ui.M2HStepLineEdit.channel = self.M2_tilt.stepsize_ca
+        self.ui.M2HStepLabel.channel = self.M2_tilt.stepsize_ca
+        self.ui.M2HRevPushButton.channel = self.M2_tilt.stepreverse_ca
+        self.ui.M2HRevIndicator.channel = self.M2_tilt.stepreverse_indicator_ca
+        self.ui.M2HFwdPushButton.channel = self.M2_tilt.stepforward_ca
+        self.ui.M2HFwdIndicator.channel = self.M2_tilt.stepforward_indicator_ca
+        self.ui.M2HTotalLabel.channel = self.M2_tilt.steptotal_ca
         self.ui.NFImageView.view.invertX(False)
         self.ui.NFImageView.view.invertY(False)
         self.ui.NFImageView.readingOrder = 1
