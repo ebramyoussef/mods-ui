@@ -77,6 +77,8 @@ class testScreen(pydm.Display):
         self.ui.FFCYLabel.channel = self.FF_cam.centroidy_ca
         self.ui.NFImageView.view.invertX(False)
         self.ui.NFImageView.view.invertY(False)
+        self.ui.NFRefView.view.invertX(False)
+        self.ui.FFRefView.view.invertY(False)
         self.ui.NFImageView.readingOrder = 1
         self.ui.FFImageView.view.invertX(False)
         self.ui.FFImageView.view.invertY(False)
