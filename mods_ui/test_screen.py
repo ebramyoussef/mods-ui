@@ -215,7 +215,7 @@ class testScreen(pydm.Display):
         screen.ui.buttonBox.rejected.connect(screen.close)
 
     def load_ref_settings(self, image_object, classification):
-        screen = imageSettingsScreen()
+        screen = refSettingsScreen()
         screen.ui.minLineEdit.setText(str(image_object.colorMapMin))
         screen.ui.maxLineEdit.setText(str(image_object.colorMapMax))
         screen.ui.XLineEdit.setText(str(image_object.roi.pos().x()))
