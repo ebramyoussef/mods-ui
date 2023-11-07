@@ -3,7 +3,7 @@ import pydm
 from PyQt5.QtWidgets import QApplication
 from ophyd import EpicsSignal, EpicsSignalRO, EpicsSignalWithRBV
 import sys
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from image_settings_2_ui import Ui_imageSettingsForm
 from ref_settings import Ui_refSettingsForm
 import pyqtgraph as pg
@@ -322,9 +322,13 @@ class testScreen(pydm.Display):
             image_object.view.invertX(False)
             image_object.view.invertY(False)
         elif orientation_idx == 1:
-            image_object.readingOrder = 0
-            image_object.view.invertX(False)
-            image_object.view.invertY(True)
+            tr = QtGui.QTransform()
+            tr.rotate(90)
+            image_object.imageItem.setTransform(tr)
+            # image_object.readingOrder = 0
+            # image_object.view.invertX(False)
+            # image_object.view.invertY(True)
+
         elif orientation_idx == 2:
             image_object.readingOrder = 1
             image_object.view.invertX(True)
