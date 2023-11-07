@@ -85,6 +85,12 @@ class testScreen(pydm.Display):
         self.ff_orientation_idx = 0
         self.NF_cam.set_image_object(self.ui.NFImageView)
         self.FF_cam.set_image_object(self.ui.FFImageView)
+        self.ui.NFUploadRefPushButton.clicked.connect(
+            lambda: self.upload_reference(self.ui.NFRefView)
+        )
+        self.ui.FFUploadRefPushButton.clicked.connect(
+            lambda: self.upload_reference(self.ui.FFRefView)
+        )
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.NF_cam)
         )
@@ -106,6 +112,24 @@ class testScreen(pydm.Display):
         return path.join(
             path.dirname(path.realpath(__file__)), self.ui_filename()
         )
+
+    def upload_reference(self, image_object):
+        try:
+            fileName = QtWidgets.QFileDialog.getOpenFileName(
+                parent=self,
+                caption="Load Reference...",
+                filter="Numpy Arrays (*.npy)",
+            )[0]
+            if fileName == "":
+                raise Exception("No File Specified")
+            if fileName.lower().endswith(".npy"):
+                reference_data = np.load(fileName)
+            else:
+                raise Exception("Unsupported file format")
+        except Exception as e:
+            print("fileSave failed:", e)
+            QtWidgets.QMessageBox.warning(self, "File Save Failed", str(e))
+        image_object.setImage(reference_data)
 
     def autoset_colormap(self, image_object):
         min_max = image_object.quickMinMax(image_object.getImageItem().image)
