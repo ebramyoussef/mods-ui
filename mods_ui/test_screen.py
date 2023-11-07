@@ -59,12 +59,12 @@ class testScreen(pydm.Display):
         self.ui.FFRefGroupBox.setVisible(False)
         self.ui.NFShowRefPushButton.clicked.connect(
             lambda: self.ui.NFRefGroupBox.setVisible(
-                not self.ui.NFRefGroupBox.visible
+                not self.ui.NFRefGroupBox.isVisible()
             )
         )
         self.ui.FFShowRefPushButton.clicked.connect(
             lambda: self.ui.FFRefGroupBox.setVisible(
-                not self.ui.FFRefGroupBox.visible
+                not self.ui.FFRefGroupBox.isVisible()
             )
         )
         self.ui.NFImageView.imageChannel = self.NF_cam.image_ca
