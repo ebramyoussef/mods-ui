@@ -313,6 +313,7 @@ class testScreen(pydm.Display):
             roi_size = pg.Point(self.ROI_range_x_val, self.ROI_range_y_val)
             image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
             self.apply_orientation(image_object, orientation_idx)
+            image_object.redrawImage()
             screen.close()
 
     def apply_orientation(self, image_object, orientation_idx):
