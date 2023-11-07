@@ -148,8 +148,7 @@ class testScreen(pydm.Display):
 
     def autoset_colormap(self, image_object):
         min_max = image_object.quickMinMax(image_object.getImageItem().image)
-        image_object.colorMapMin = min_max[0][0]
-        image_object.colorMapMax = min_max[0][1]
+        image_object.setLevels(min=min_max[0][0], max=min_max[0][1])
 
     def save_image(self, image_object):
         image_data = image_object.getImageItem().image
