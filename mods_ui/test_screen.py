@@ -92,13 +92,19 @@ class testScreen(pydm.Display):
         self.ff_orientation_idx = 0
         self.nfref_orientation_idx = 0
         self.ffref_orientation_idx = 0
+        self.nfref_data = None
+        self.ffref_data = None
         self.NF_cam.set_image_object(self.ui.NFImageView)
         self.FF_cam.set_image_object(self.ui.FFImageView)
         self.ui.NFUploadRefPushButton.clicked.connect(
-            lambda: self.upload_reference(self.ui.NFRefView)
+            lambda: self.upload_reference(
+                self.ui.NFRefView, classification="NF"
+            )
         )
         self.ui.FFUploadRefPushButton.clicked.connect(
-            lambda: self.upload_reference(self.ui.FFRefView)
+            lambda: self.upload_reference(
+                self.ui.FFRefView, classification="FF"
+            )
         )
         self.ui.NFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.NF_cam)
@@ -128,7 +134,7 @@ class testScreen(pydm.Display):
             path.dirname(path.realpath(__file__)), self.ui_filename()
         )
 
-    def upload_reference(self, image_object):
+    def upload_reference(self, image_object, classification):
         try:
             fileName = QtWidgets.QFileDialog.getOpenFileName(
                 parent=self,
@@ -142,13 +148,20 @@ class testScreen(pydm.Display):
             else:
                 raise Exception("Unsupported file format")
         except Exception as e:
-            print("fileSave failed:", e)
             QtWidgets.QMessageBox.warning(self, "File Save Failed", str(e))
         image_object.setImage(reference_data)
+        if classification == "NF":
+            self.nfref_data = reference_data
+        elif classification == "FF":
+            self.ffref_data = reference_data
 
-    def autoset_colormap(self, image_object):
+    def autoset_colormap(self, image_object, type):
         min_max = image_object.quickMinMax(image_object.getImageItem().image)
-        image_object.setLevels(min=min_max[0][0], max=min_max[0][1])
+        if type == "ref":
+            image_object.setLevels(min=min_max[0][0], max=min_max[0][1])
+        elif type == "img":
+            image_object.colorMapMin = min_max[0][0]
+            image_object.colorMapMax = min_max[0][1]
 
     def save_image(self, image_object):
         image_data = image_object.getImageItem().image
@@ -167,11 +180,9 @@ class testScreen(pydm.Display):
                     "File Save Succeeded",
                     "Image has been saved as a numpy file: %s" % (fileName),
                 )
-                # print("Saved to a numpy file %s" % (fileName))
             else:
                 raise Exception("Unsupported file format")
         except Exception as e:
-            print("fileSave failed:", e)
             QtWidgets.QMessageBox.warning(self, "File Save Failed", str(e))
 
     def load_image_settings(self, cam_object):
@@ -213,31 +224,6 @@ class testScreen(pydm.Display):
         )
         screen.ui.buttonBox.rejected.connect(screen.close)
 
-    def load_ref_settings(self, image_object, classification):
-        screen = refSettingsScreen()
-        screen.ui.minLineEdit.setText(str(image_object.colorMapMin))
-        screen.ui.maxLineEdit.setText(str(image_object.colorMapMax))
-        screen.ui.XLineEdit.setText(str(image_object.roi.pos().x()))
-        screen.ui.YLineEdit.setText(str(image_object.roi.pos().y()))
-        screen.ui.WLineEdit.setText(str(image_object.roi.size().x()))
-        screen.ui.HLineEdit.setText(str(image_object.roi.size().y()))
-        screen.ui.normalizeCheckBox.setChecked(image_object.normalizeData)
-        if classification == "NF":
-            screen.ui.orientationComboBox.setCurrentIndex(
-                self.nfref_orientation_idx
-            )
-        elif classification == "FF":
-            screen.ui.orientationComboBox.setCurrentIndex(
-                self.ffref_orientation_idx
-            )
-        screen.show()
-        screen.ui.buttonBox.accepted.connect(
-            lambda: self.apply_ref_settings(
-                screen, image_object, classification
-            )
-        )
-        screen.ui.buttonBox.rejected.connect(screen.close)
-
     def apply_image_settings(self, screen, cam_object):
         try:
             self.color_map_min_val = float(screen.ui.minLineEdit.text())
@@ -263,19 +249,47 @@ class testScreen(pydm.Display):
             msg.exec_()
         if screen.no_errors is True:
             if self.autoset_val:
-                self.autoset_colormap(cam_object.image_object)
+                self.autoset_colormap(cam_object.image_object, type="img")
             else:
-                cam_object.image_object.setLevels(
-                    min=self.color_map_min_val, max=self.color_map_max_val
-                )
+                cam_object.image_object.colorMapMin = self.color_map_min_val
+                cam_object.image_object.colorMapMax = self.color_map_max_val
             cam_object.image_object.normalizeData = self.normalize_val
             roi_pos = pg.Point(
                 self.ROI_position_x_val, self.ROI_position_y_val
             )
             roi_size = pg.Point(self.ROI_range_x_val, self.ROI_range_y_val)
             cam_object.image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
-            self.apply_orientation(cam_object.image_object, orientation_idx)
+            self.apply_orientation(
+                cam_object.image_object,
+                orientation_idx,
+                type="ref",
+                classification=cam_object.classification,
+            )
             screen.close()
+
+    def load_ref_settings(self, image_object, classification):
+        screen = refSettingsScreen()
+        screen.ui.minLineEdit.setText(
+            str(image_object.imageItem.getLevels()[0])
+        )
+        screen.ui.maxLineEdit.setText(
+            str(image_object.imageItem.getLevels()[1])
+        )
+        if classification == "NF":
+            screen.ui.orientationComboBox.setCurrentIndex(
+                self.nfref_orientation_idx
+            )
+        elif classification == "FF":
+            screen.ui.orientationComboBox.setCurrentIndex(
+                self.ffref_orientation_idx
+            )
+        screen.show()
+        screen.ui.buttonBox.accepted.connect(
+            lambda: self.apply_ref_settings(
+                screen, image_object, classification
+            )
+        )
+        screen.ui.buttonBox.rejected.connect(screen.close)
 
     def apply_ref_settings(self, screen, image_object, classification):
         try:
@@ -283,10 +297,6 @@ class testScreen(pydm.Display):
             self.color_map_max_val = float(screen.ui.maxLineEdit.text())
             self.normalize_val = screen.ui.normalizeCheckBox.isChecked()
             self.autoset_val = screen.ui.autosetCheckBox.isChecked()
-            self.ROI_position_x_val = float(screen.ui.XLineEdit.text())
-            self.ROI_range_x_val = float(screen.ui.WLineEdit.text())
-            self.ROI_position_y_val = float(screen.ui.YLineEdit.text())
-            self.ROI_range_y_val = float(screen.ui.HLineEdit.text())
             orientation_idx = screen.ui.orientationComboBox.currentIndex()
             if classification == "NF":
                 self.nfref_orientation_idx = orientation_idx
@@ -301,51 +311,90 @@ class testScreen(pydm.Display):
             msg.buttonClicked.connect(self.show)
             msg.exec_()
         if screen.no_errors is True:
+            self.apply_orientation(
+                image_object,
+                orientation_idx,
+                type="ref",
+                classification=classification,
+            )
             if self.autoset_val:
-                self.autoset_colormap(image_object)
+                self.autoset_colormap(image_object, type="ref")
             else:
                 image_object.setLevels(
                     min=self.color_map_min_val, max=self.color_map_max_val
                 )
-            image_object.normalizeData = self.normalize_val
-            roi_pos = pg.Point(
-                self.ROI_position_x_val, self.ROI_position_y_val
-            )
-            roi_size = pg.Point(self.ROI_range_x_val, self.ROI_range_y_val)
-            image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
-            self.apply_orientation(image_object, orientation_idx)
+            if self.normalize_val is True:
+                norm_img = image_object.normalize(
+                    image_object.getImageItem().image
+                )
+                image_object.setImage(norm_img)
             image_object.redrawImage()
             screen.close()
 
-    def apply_orientation(self, image_object, orientation_idx):
-        if orientation_idx == 0:
-            image_object.readingOrder = 1
-            image_object.view.invertX(False)
-            image_object.view.invertY(False)
-        elif orientation_idx == 1:
-            tr = QtGui.QTransform()
-            tr.rotate(90)
-            image_object.imageItem.setTransform(tr)
-            # image_object.readingOrder = 0
-            # image_object.view.invertX(False)
-            # image_object.view.invertY(True)
+    def apply_orientation(
+        self, image_object, orientation_idx, type, classification
+    ):
+        if type == "img":
+            if orientation_idx == 0:
+                image_object.readingOrder = 1
+                image_object.view.invertX(False)
+                image_object.view.invertY(False)
+            elif orientation_idx == 1:
+                image_object.readingOrder = 0
+                image_object.view.invertX(False)
+                image_object.view.invertY(True)
 
-        elif orientation_idx == 2:
-            image_object.readingOrder = 1
-            image_object.view.invertX(True)
-            image_object.view.invertY(True)
-        elif orientation_idx == 3:
-            image_object.readingOrder = 0
-            image_object.view.invertX(False)
-            image_object.view.invertY(False)
-        elif orientation_idx == 4:
-            image_object.readingOrder = 1
-            image_object.view.invertX(True)
-            image_object.view.invertY(False)
-        elif orientation_idx == 5:
-            image_object.readingOrder = 1
-            image_object.view.invertX(False)
-            image_object.view.invertY(True)
+            elif orientation_idx == 2:
+                image_object.readingOrder = 1
+                image_object.view.invertX(True)
+                image_object.view.invertY(True)
+            elif orientation_idx == 3:
+                image_object.readingOrder = 0
+                image_object.view.invertX(False)
+                image_object.view.invertY(False)
+            elif orientation_idx == 4:
+                image_object.readingOrder = 1
+                image_object.view.invertX(True)
+                image_object.view.invertY(False)
+            elif orientation_idx == 5:
+                image_object.readingOrder = 1
+                image_object.view.invertX(False)
+                image_object.view.invertY(True)
+        elif type == "ref":
+            if classification == "NF":
+                original_image = self.nfref_data
+            elif classification == "FF":
+                original_image = self.ffref_data
+            if orientation_idx == 0:
+                image_object.setImage(original_image)
+                image_object.view.invertX(False)
+                image_object.view.invertY(False)
+            elif orientation_idx == 1:
+                tr = QtGui.QTransform()
+                tr.rotate(90)
+                image_object.setImage(original_image, transform=tr)
+                image_object.view.invertX(False)
+                image_object.view.invertY(False)
+            elif orientation_idx == 2:
+                tr = QtGui.QTransform()
+                tr.rotate(180)
+                image_object.setImage(original_image, transform=tr)
+                image_object.view.invertX(False)
+                image_object.view.invertY(False)
+            elif orientation_idx == 3:
+                tr = QtGui.QTransform()
+                tr.rotate(270)
+                image_object.setImage(original_image, transform=tr)
+                image_object.view.invertX(False)
+                image_object.view.invertY(False)
+            elif orientation_idx == 4:
+                image_object.setImage(original_image)
+                image_object.view.invertX(True)
+                image_object.view.invertY(False)
+            elif orientation_idx == 5:
+                image_object.setImage(original_image)
+                image_object.view.invertX(False)
+                image_object.view.invertY(True)
 
 
 class imageSettingsScreen(QtWidgets.QWidget):
