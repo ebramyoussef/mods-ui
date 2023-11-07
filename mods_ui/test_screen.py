@@ -265,8 +265,9 @@ class testScreen(pydm.Display):
             if self.autoset_val:
                 self.autoset_colormap(cam_object.image_object)
             else:
-                cam_object.image_object.colorMapMin = self.color_map_min_val
-                cam_object.image_object.colorMapMax = self.color_map_max_val
+                cam_object.image_object.setLevels(
+                    min=self.color_map_min_val, max=self.color_map_max_val
+                )
             cam_object.image_object.normalizeData = self.normalize_val
             roi_pos = pg.Point(
                 self.ROI_position_x_val, self.ROI_position_y_val
@@ -303,8 +304,9 @@ class testScreen(pydm.Display):
             if self.autoset_val:
                 self.autoset_colormap(image_object)
             else:
-                image_object.colorMapMin = self.color_map_min_val
-                image_object.colorMapMax = self.color_map_max_val
+                image_object.setLevels(
+                    min=self.color_map_min_val, max=self.color_map_max_val
+                )
             image_object.normalizeData = self.normalize_val
             roi_pos = pg.Point(
                 self.ROI_position_x_val, self.ROI_position_y_val
