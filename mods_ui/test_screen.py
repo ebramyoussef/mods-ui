@@ -262,7 +262,7 @@ class testScreen(pydm.Display):
             self.apply_orientation(
                 cam_object.image_object,
                 orientation_idx,
-                type="ref",
+                type="img",
                 classification=cam_object.classification,
             )
             screen.close()
@@ -371,7 +371,7 @@ class testScreen(pydm.Display):
                 image_object.view.invertY(False)
             elif orientation_idx == 1:
                 tr = QtGui.QTransform()
-                tr.rotate(90)
+                tr.rotate(270)
                 image_object.setImage(original_image, transform=tr)
                 image_object.view.invertX(False)
                 image_object.view.invertY(False)
@@ -383,7 +383,7 @@ class testScreen(pydm.Display):
                 image_object.view.invertY(False)
             elif orientation_idx == 3:
                 tr = QtGui.QTransform()
-                tr.rotate(270)
+                tr.rotate(90)
                 image_object.setImage(original_image, transform=tr)
                 image_object.view.invertX(False)
                 image_object.view.invertY(False)
