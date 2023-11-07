@@ -5,6 +5,7 @@ from ophyd import EpicsSignal, EpicsSignalRO, EpicsSignalWithRBV
 import sys
 from PyQt5 import QtWidgets
 from image_settings_2_ui import Ui_imageSettingsForm
+from ref_settings import Ui_refSettingsForm
 import pyqtgraph as pg
 import numpy as np
 
@@ -89,6 +90,8 @@ class testScreen(pydm.Display):
         self.ui.FFRefView.readingOrder = 1
         self.nf_orientation_idx = 0
         self.ff_orientation_idx = 0
+        self.nfref_orientation_idx = 0
+        self.ffref_orientation_idx = 0
         self.NF_cam.set_image_object(self.ui.NFImageView)
         self.FF_cam.set_image_object(self.ui.FFImageView)
         self.ui.NFUploadRefPushButton.clicked.connect(
@@ -102,6 +105,12 @@ class testScreen(pydm.Display):
         )
         self.ui.FFImageSettingsPushButton.clicked.connect(
             lambda: self.load_image_settings(self.FF_cam)
+        )
+        self.ui.NFRefSettingsPushButton.clicked.connect(
+            lambda: self.load_ref_settings(self.ui.NFRefView)
+        )
+        self.ui.FFRefSettingsPushButton.clicked.connect(
+            lambda: self.load_ref_settings(self.ui.FFRefView)
         )
         self.ui.NFSavePushButton.clicked.connect(
             lambda: self.save_image(self.NF_cam.image_object)
@@ -205,6 +214,31 @@ class testScreen(pydm.Display):
         )
         screen.ui.buttonBox.rejected.connect(screen.close)
 
+    def load_ref_settings(self, image_object, classification):
+        screen = imageSettingsScreen()
+        screen.ui.minLineEdit.setText(str(image_object.colorMapMin))
+        screen.ui.maxLineEdit.setText(str(image_object.colorMapMax))
+        screen.ui.XLineEdit.setText(str(image_object.roi.pos().x()))
+        screen.ui.YLineEdit.setText(str(image_object.roi.pos().y()))
+        screen.ui.WLineEdit.setText(str(image_object.roi.size().x()))
+        screen.ui.HLineEdit.setText(str(image_object.roi.size().y()))
+        screen.ui.normalizeCheckBox.setChecked(image_object.normalizeData)
+        if classification == "NF":
+            screen.ui.orientationComboBox.setCurrentIndex(
+                self.nfref_orientation_idx
+            )
+        elif classification == "FF":
+            screen.ui.orientationComboBox.setCurrentIndex(
+                self.ffref_orientation_idx
+            )
+        screen.show()
+        screen.ui.buttonBox.accepted.connect(
+            lambda: self.apply_ref_settings(
+                screen, image_object, classification
+            )
+        )
+        screen.ui.buttonBox.rejected.connect(screen.close)
+
     def apply_image_settings(self, screen, cam_object):
         try:
             self.color_map_min_val = float(screen.ui.minLineEdit.text())
@@ -240,34 +274,72 @@ class testScreen(pydm.Display):
             )
             roi_size = pg.Point(self.ROI_range_x_val, self.ROI_range_y_val)
             cam_object.image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
-            self.apply_orientation(cam_object, orientation_idx)
+            self.apply_orientation(cam_object.image_object, orientation_idx)
             screen.close()
 
-    def apply_orientation(self, cam_object, orientation_idx):
+    def apply_ref_settings(self, screen, image_object, classification):
+        try:
+            self.color_map_min_val = float(screen.ui.minLineEdit.text())
+            self.color_map_max_val = float(screen.ui.maxLineEdit.text())
+            self.normalize_val = screen.ui.normalizeCheckBox.isChecked()
+            self.autoset_val = screen.ui.autosetCheckBox.isChecked()
+            self.ROI_position_x_val = float(screen.ui.XLineEdit.text())
+            self.ROI_range_x_val = float(screen.ui.WLineEdit.text())
+            self.ROI_position_y_val = float(screen.ui.YLineEdit.text())
+            self.ROI_range_y_val = float(screen.ui.HLineEdit.text())
+            orientation_idx = screen.ui.orientationComboBox.currentIndex()
+            if classification == "NF":
+                self.nfref_orientation_idx = orientation_idx
+            elif classification == "FF":
+                self.ffref_orientation_idx = orientation_idx
+        except ValueError:
+            screen.no_errors = False
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText("ValueError: Invalid input values.")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.buttonClicked.connect(self.show)
+            msg.exec_()
+        if screen.no_errors is True:
+            if self.autoset_val:
+                self.autoset_colormap(image_object)
+            else:
+                image_object.colorMapMin = self.color_map_min_val
+                image_object.colorMapMax = self.color_map_max_val
+            image_object.normalizeData = self.normalize_val
+            roi_pos = pg.Point(
+                self.ROI_position_x_val, self.ROI_position_y_val
+            )
+            roi_size = pg.Point(self.ROI_range_x_val, self.ROI_range_y_val)
+            image_object.roi = pg.ROI(pos=roi_pos, size=roi_size)
+            self.apply_orientation(image_object, orientation_idx)
+            screen.close()
+
+    def apply_orientation(self, image_object, orientation_idx):
         if orientation_idx == 0:
-            cam_object.image_object.readingOrder = 1
-            cam_object.image_object.view.invertX(False)
-            cam_object.image_object.view.invertY(False)
+            image_object.readingOrder = 1
+            image_object.view.invertX(False)
+            image_object.view.invertY(False)
         elif orientation_idx == 1:
-            cam_object.image_object.readingOrder = 0
-            cam_object.image_object.view.invertX(False)
-            cam_object.image_object.view.invertY(True)
+            image_object.readingOrder = 0
+            image_object.view.invertX(False)
+            image_object.view.invertY(True)
         elif orientation_idx == 2:
-            cam_object.image_object.readingOrder = 1
-            cam_object.image_object.view.invertX(True)
-            cam_object.image_object.view.invertY(True)
+            image_object.readingOrder = 1
+            image_object.view.invertX(True)
+            image_object.view.invertY(True)
         elif orientation_idx == 3:
-            cam_object.image_object.readingOrder = 0
-            cam_object.image_object.view.invertX(False)
-            cam_object.image_object.view.invertY(False)
+            image_object.readingOrder = 0
+            image_object.view.invertX(False)
+            image_object.view.invertY(False)
         elif orientation_idx == 4:
-            cam_object.image_object.readingOrder = 1
-            cam_object.image_object.view.invertX(True)
-            cam_object.image_object.view.invertY(False)
+            image_object.readingOrder = 1
+            image_object.view.invertX(True)
+            image_object.view.invertY(False)
         elif orientation_idx == 5:
-            cam_object.image_object.readingOrder = 1
-            cam_object.image_object.view.invertX(False)
-            cam_object.image_object.view.invertY(True)
+            image_object.readingOrder = 1
+            image_object.view.invertX(False)
+            image_object.view.invertY(True)
 
 
 class imageSettingsScreen(QtWidgets.QWidget):
@@ -313,6 +385,14 @@ class imageSettingsScreen(QtWidgets.QWidget):
         if value > self.cam_object.maxcolor:
             value = self.cam_object.maxcolor
         self.ui.maxSlider.setValue(value)
+
+
+class refSettingsScreen(QtWidgets.QWidget):
+    def __init__(self):
+        super(refSettingsScreen, self).__init__()
+        self.ui = Ui_refSettingsForm()
+        self.ui.setupUi(self)
+        self.no_errors = True
 
 
 if __name__ == "__main__":
