@@ -114,7 +114,27 @@ class testScreen(pydm.Display):
 
     def save_image(self, image_object):
         image_data = image_object.getImageItem().image
-        np.save("saved_image.npy", image_data)
+        try:
+            fileName = QtWidgets.QFileDialog.getSaveFileName(
+                parent=self,
+                caption="Save Image...",
+                filter="Numpy Arrays (*.npy)",
+            )[0]
+            if fileName == "":
+                raise Exception("No File Name Specified")
+            if fileName.lower().endswith(".npy"):
+                np.save(fileName, image_data)
+                QtWidgets.QMessageBox.information(
+                    self,
+                    "File Save Succeeded",
+                    "Image has been saved as a numpy file: %s" % (fileName),
+                )
+                # print("Saved to a numpy file %s" % (fileName))
+            else:
+                raise Exception("Unsupported file format")
+        except Exception as e:
+            print("fileSave failed:", e)
+            QtWidgets.QMessageBox.warning(self, "File Save Failed", str(e))
 
     def load_image_settings(self, cam_object):
         screen = imageSettingsScreen(cam_object)
