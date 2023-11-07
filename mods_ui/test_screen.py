@@ -57,6 +57,16 @@ class testScreen(pydm.Display):
         # self.resize(1200, 900)
         self.ui.NFRefGroupBox.setVisible(False)
         self.ui.FFRefGroupBox.setVisible(False)
+        self.ui.NFShowRefPushButton.clicked.connect(
+            lambda: self.ui.NFRefGroupBox.setVisible(
+                not self.ui.NFRefGroupBox.visible
+            )
+        )
+        self.ui.FFShowRefPushButton.clicked.connect(
+            lambda: self.ui.FFRefGroupBox.setVisible(
+                not self.ui.FFRefGroupBox.visible
+            )
+        )
         self.ui.NFImageView.imageChannel = self.NF_cam.image_ca
         self.ui.FFImageView.imageChannel = self.FF_cam.image_ca
         self.ui.NFImageView.widthChannel = self.NF_cam.width_ca
