@@ -100,7 +100,7 @@ class testScreen(pydm.Display):
         self.qss_file = "styles.qss"
         with open(self.qss_file, "r") as fh:
             self.setStyleSheet(fh.read())
-        # self.resize(1200, 900)
+        self.resize(1000, 1100)
         self.ui.NFRefGroupBox.setVisible(False)
         self.ui.FFRefGroupBox.setVisible(False)
         self.ui.NFShowRefPushButton.clicked.connect(
