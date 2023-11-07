@@ -336,29 +336,29 @@ class testScreen(pydm.Display):
     ):
         if type == "img":
             if orientation_idx == 0:
+                image_object.readingOrder = 1
                 image_object.view.invertX(False)
                 image_object.view.invertY(False)
-                image_object.readingOrder = 1
             elif orientation_idx == 1:
+                image_object.readingOrder = 0
                 image_object.view.invertX(False)
                 image_object.view.invertY(True)
-                image_object.readingOrder = 0
             elif orientation_idx == 2:
+                image_object.readingOrder = 1
                 image_object.view.invertX(True)
                 image_object.view.invertY(True)
-                image_object.readingOrder = 1
             elif orientation_idx == 3:
-                image_object.view.invertX(False)
-                image_object.view.invertY(False)
                 image_object.readingOrder = 0
-            elif orientation_idx == 4:
                 image_object.view.invertX(True)
                 image_object.view.invertY(False)
+            elif orientation_idx == 4:
                 image_object.readingOrder = 1
+                image_object.view.invertX(True)
+                image_object.view.invertY(False)
             elif orientation_idx == 5:
+                image_object.readingOrder = 1
                 image_object.view.invertX(False)
                 image_object.view.invertY(True)
-                image_object.readingOrder = 1
         elif type == "ref":
             if classification == "NF":
                 original_image = self.nfref_data
