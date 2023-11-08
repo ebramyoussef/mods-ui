@@ -221,6 +221,9 @@ class testScreen(pydm.Display):
         )
 
     def draw_ellipse(self, cam_object: CamIOC):
+        cam_object.wPV("Stats2:EnableCallbacks", 1)
+        cam_object.wPV("Stats2:ComputeCentroid", 1)
+        cam_object.wPV("Stats2:ComputeStatistics", 1)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Use", 1)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Shape", 2)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "DrawMode", 1)
