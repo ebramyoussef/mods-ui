@@ -23,10 +23,7 @@ class CamIOC:
         centroidy_pv_suffix="Stats2:CentroidY_RBV",
         sigmax_pv_suffix="Stats2:SigmaX_RBV",
         sigmay_pv_suffix="Stats2:SigmaY_RBV",
-<<<<<<< Updated upstream
-=======
         ellipse_overlay_pv_suffix="Over1:1:",
->>>>>>> Stashed changes
     ):
         self.base_pv = base_pv
         self.classification = classification
