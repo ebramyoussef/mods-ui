@@ -220,8 +220,6 @@ class testScreen(pydm.Display):
             path.dirname(path.realpath(__file__)), self.ui_filename()
         )
 
-<<<<<<< Updated upstream
-=======
     def draw_ellipse(self, cam_object: CamIOC):
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Use", 1)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Shape", 3)
@@ -245,7 +243,6 @@ class testScreen(pydm.Display):
             cam_object.base_pv + cam_object.centroidY_pv + " CP",
         )
 
->>>>>>> Stashed changes
     def upload_reference(self, image_object, classification):
         try:
             fileName = QtWidgets.QFileDialog.getOpenFileName(
