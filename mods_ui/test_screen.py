@@ -240,7 +240,7 @@ class testScreen(pydm.Display):
         )
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "CenterYLink.DOL",
-            cam_object.centroidY_pv + " CP",
+            cam_object.centroidy_pv + " CP",
         )
 
     def upload_reference(self, image_object, classification):
