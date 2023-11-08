@@ -23,7 +23,7 @@ class CamIOC:
         centroidy_pv_suffix="Stats2:CentroidY_RBV",
         sigmax_pv_suffix="Stats2:SigmaX_RBV",
         sigmay_pv_suffix="Stats2:SigmaY_RBV",
-        ellipse_overlay_pv_suffix="Over1:1:",
+        ellipse_overlay_pv_suffix="IMAGE1:Box1:",
     ):
         self.base_pv = base_pv
         self.classification = classification
@@ -224,6 +224,9 @@ class testScreen(pydm.Display):
         cam_object.wPV("Stats2:EnableCallbacks", 1)
         cam_object.wPV("Stats2:ComputeCentroid", 1)
         cam_object.wPV("Stats2:ComputeStatistics", 1)
+        cam_object.wPV("IMAGE1:NDArrayPort", "IMAGE1:Over")
+        cam_object.wPV("IMAGE1:Over:EnableCallbacks", 1)
+        cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Name", "Ellipse1")
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Use", 1)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Shape", 2)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "DrawMode", 1)
@@ -232,19 +235,24 @@ class testScreen(pydm.Display):
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthY", 3)
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "SizeXLink.DOL",
-            '{} {}'.format(cam_object.sigmax_pv, "CP"),
+            cam_object.sigmax_pv + " CP")
+        cam_object.wPV(
+            cam_object.ellipse_overlay_pv_suffix + "PositionXLink.DOL",
+            '')
+        cam_object.wPV(
+            cam_object.ellipse_overlay_pv_suffix + "CenterXLink.DOL",
+            cam_object.centroidx_pv +" CP"
         )
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "SizeYLink.DOL",
-            '{} {}'.format(cam_object.sigmay_pv, "CP"),
+            cam_object.sigmay_pv +" CP"
         )
         cam_object.wPV(
-            cam_object.ellipse_overlay_pv_suffix + "CenterXLink.DOL",
-            '{} {}'.format(cam_object.centroidx_pv, "CP"),
-        )
+            cam_object.ellipse_overlay_pv_suffix + "PositionYLink.DOL",
+            '')
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "CenterYLink.DOL",
-            '{} {}'.format(cam_object.centroidy_pv, "CP"),
+            cam_object.centroidy_pv +" CP"
         )
 
     def upload_reference(self, image_object, classification):
