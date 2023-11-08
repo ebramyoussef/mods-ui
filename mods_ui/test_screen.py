@@ -94,7 +94,7 @@ class testScreen(pydm.Display):
             parent=parent, args=args, macros=macros
         )
         self.NF_cam = CamIOC(
-            base_pv="LM1K4:COM_DP1_TF1_NF1:", classification="NF"
+            base_pv="LAS:LHN:BAY3:CAM:FF1:", classification="NF"
         )
         self.FF_cam = CamIOC(
             base_pv="LM1K4:COM_DP1_TF1_FF1:", classification="FF"
@@ -228,7 +228,7 @@ class testScreen(pydm.Display):
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthX", 3)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthY", 3)
         cam_object.wPV(
-            cam_object.ellipse_overlay_pv_suffix + "SizeLink.DOL",
+            cam_object.ellipse_overlay_pv_suffix + "SizeXLink.DOL",
             '{} {}'.format(cam_object.sigmax_pv, "CP"),
         )
         cam_object.wPV(
