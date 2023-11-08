@@ -94,7 +94,7 @@ class testScreen(pydm.Display):
             parent=parent, args=args, macros=macros
         )
         self.NF_cam = CamIOC(
-            base_pv="LM1K4:COM_DP1_TF1_NF1:", classification="NF"
+            base_pv="TMO:CAM:IMATM:02:", classification="NF"
         )
         self.FF_cam = CamIOC(
             base_pv="LM1K4:COM_DP1_TF1_FF1:", classification="FF"
