@@ -224,6 +224,7 @@ class testScreen(pydm.Display):
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Use", 1)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Shape", 2)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "DrawMode", 1)
+        cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Green", 2000)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthX", 3)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthY", 3)
         cam_object.wPV(
