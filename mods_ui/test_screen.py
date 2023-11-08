@@ -23,6 +23,10 @@ class CamIOC:
         centroidy_pv_suffix="Stats2:CentroidY_RBV",
         sigmax_pv_suffix="Stats2:SigmaX_RBV",
         sigmay_pv_suffix="Stats2:SigmaY_RBV",
+<<<<<<< Updated upstream
+=======
+        ellipse_overlay_pv_suffix="Over1:1:",
+>>>>>>> Stashed changes
     ):
         self.base_pv = base_pv
         self.classification = classification
@@ -42,6 +46,11 @@ class CamIOC:
         self.sigmay_ca = self.protocal + self.sigmay_pv
         self.bits = EpicsSignalRO(read_pv=self.bits_pv)
         self.maxcolor = (1 << self.bits.get()) - 1
+        self.ellipse_overlay_pv_suffix = ellipse_overlay_pv_suffix
+
+    def wPV(self, pv_suffix, yourVal):
+        temppv = EpicsSignal(self.base_pv + pv_suffix)
+        temppv.put(yourVal)
 
     def set_image_object(self, image_object):
         self.image_object = image_object
@@ -201,6 +210,9 @@ class testScreen(pydm.Display):
         self.ui.FFSavePushButton.clicked.connect(
             lambda: self.save_image(self.FF_cam.image_object)
         )
+        self.ui.NFEllipsePushButton.clicked.connect(
+            lambda: self.draw_ellipse(self.NF_cam)
+        )
         self.show()
 
     def ui_filename(self):
@@ -211,6 +223,32 @@ class testScreen(pydm.Display):
             path.dirname(path.realpath(__file__)), self.ui_filename()
         )
 
+<<<<<<< Updated upstream
+=======
+    def draw_ellipse(self, cam_object: CamIOC):
+        cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Use", 1)
+        cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Shape", 3)
+        cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "DrawMode", 1)
+        cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthX", 3)
+        cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthY", 3)
+        cam_object.wPV(
+            cam_object.ellipse_overlay_pv_suffix + "SizeXLink.DOL",
+            cam_object.base_pv + cam_object.sigmax_pv + " CP",
+        )
+        cam_object.wPV(
+            cam_object.ellipse_overlay_pv_suffix + "SizeYLink.DOL",
+            cam_object.base_pv + cam_object.sigmay_pv + " CP",
+        )
+        cam_object.wPV(
+            cam_object.ellipse_overlay_pv_suffix + "CenterXLink.DOL",
+            cam_object.base_pv + cam_object.centroidx_pv + " CP",
+        )
+        cam_object.wPV(
+            cam_object.ellipse_overlay_pv_suffix + "CenterYLink.DOL",
+            cam_object.base_pv + cam_object.centroidY_pv + " CP",
+        )
+
+>>>>>>> Stashed changes
     def upload_reference(self, image_object, classification):
         try:
             fileName = QtWidgets.QFileDialog.getOpenFileName(
