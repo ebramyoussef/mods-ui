@@ -239,7 +239,7 @@ class testScreen(pydm.Display):
             '')
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "CenterXLink.DOL",
-            cam_object.centroidx_pv +" CP"
+            (cam_object.centroidx_pv +" CP").encode(encoding="ascii")
         )
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "SizeXLink.DOL",
