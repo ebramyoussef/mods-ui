@@ -228,19 +228,19 @@ class testScreen(pydm.Display):
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthY", 3)
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "SizeXLink.DOL",
-            cam_object.sigmax_pv + " CP",
+            '{} {}'.format(cam_object.sigmax_pv, "CP"),
         )
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "SizeYLink.DOL",
-            cam_object.sigmay_pv + " CP",
+            '{} {}'.format(cam_object.sigmay_pv, "CP"),
         )
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "CenterXLink.DOL",
-            cam_object.centroidx_pv + " CP",
+            '{} {}'.format(cam_object.centroidx_pv, "CP"),
         )
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "CenterYLink.DOL",
-            cam_object.centroidy_pv + " CP",
+            '{} {}'.format(cam_object.centroidy_pv, "CP"),
         )
 
     def upload_reference(self, image_object, classification):
