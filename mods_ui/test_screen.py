@@ -23,7 +23,7 @@ class CamIOC:
         centroidy_pv_suffix="Stats2:CentroidY_RBV",
         sigmax_pv_suffix="Stats2:SigmaX_RBV",
         sigmay_pv_suffix="Stats2:SigmaY_RBV",
-        ellipse_overlay_pv_suffix="ROI1:",
+        ellipse_overlay_pv_suffix="Over1:1:",
     ):
         self.base_pv = base_pv
         self.classification = classification
@@ -222,13 +222,13 @@ class testScreen(pydm.Display):
 
     def draw_ellipse(self, cam_object: CamIOC):
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Use", 1)
-        cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Shape", 3)
+        cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "Shape", 2)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "DrawMode", 1)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthX", 3)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthY", 3)
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "SizeXLink.DOL",
-            cam_object.base_pv + cam_object.sigmax_pv + " CP NMS",
+            cam_object.base_pv + cam_object.sigmax_pv + " CP",
         )
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "SizeYLink.DOL",
