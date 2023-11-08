@@ -228,7 +228,7 @@ class testScreen(pydm.Display):
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthX", 3)
         cam_object.wPV(cam_object.ellipse_overlay_pv_suffix + "WidthY", 3)
         cam_object.wPV(
-            cam_object.ellipse_overlay_pv_suffix + "SizeXLink.DOL",
+            cam_object.ellipse_overlay_pv_suffix + "SizeLink.DOL",
             '{} {}'.format(cam_object.sigmax_pv, "CP"),
         )
         cam_object.wPV(
