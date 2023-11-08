@@ -23,7 +23,7 @@ class CamIOC:
         centroidy_pv_suffix="Stats2:CentroidY_RBV",
         sigmax_pv_suffix="Stats2:SigmaX_RBV",
         sigmay_pv_suffix="Stats2:SigmaY_RBV",
-        ellipse_overlay_pv_suffix="Over1:1:",
+        ellipse_overlay_pv_suffix="IMAGE1:ROI1:",
     ):
         self.base_pv = base_pv
         self.classification = classification
@@ -232,15 +232,15 @@ class testScreen(pydm.Display):
         )
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "SizeYLink.DOL",
-            cam_object.base_pv + cam_object.sigmay_pv + " CP NMS",
+            cam_object.base_pv + cam_object.sigmay_pv + " CP",
         )
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "CenterXLink.DOL",
-            cam_object.base_pv + cam_object.centroidx_pv + " CP NMS",
+            cam_object.base_pv + cam_object.centroidx_pv + " CP",
         )
         cam_object.wPV(
             cam_object.ellipse_overlay_pv_suffix + "CenterYLink.DOL",
-            cam_object.base_pv + cam_object.centroidY_pv + " CP NMS",
+            cam_object.base_pv + cam_object.centroidY_pv + " CP",
         )
 
     def upload_reference(self, image_object, classification):
